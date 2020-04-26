@@ -79,7 +79,7 @@ class App extends Component {
           </div>
         </main>
         <footer>
-          <p>© 2020 Robin Nong. View the code <a href="https://github.com/robinnong/poketypes">here</a>.</p>
+          <p>© 2020 <a href="https://www.robinnong.com">Robin Nong</a>. View the code <a href="https://github.com/robinnong/poketypes">here</a>.</p>
         </footer>
       </div>
     )
