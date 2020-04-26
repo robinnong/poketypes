@@ -78,7 +78,9 @@ class App extends Component {
             {this.state.gameState} 
           </div>
         </main>
-        <Footer />
+        <footer>
+          <p>© 2020 Robin Nong. View the code <a href="https://github.com/robinnong/poketypes">here</a>.</p>
+        </footer>
       </div>
     )
   }
