@@ -67,7 +67,8 @@ h1 {
 
 h1::first-letter {color: #ffde4b;}
 
-h2 {
+h2, h3 {
+    font-weight: 600;
     font-size: 3rem;
     letter-spacing: 1px;
 }
@@ -149,12 +150,7 @@ input {
     border-bottom: 2px solid white;
     width: 100%;
     margin: 20px 0;
-}
-
-/* .git-link {
-    font-size: 2.4rem;
-    color: white;
-} */
+} 
 
 .counterBar {
     width: 80%;
@@ -168,6 +164,13 @@ input {
 }
 
 .counterBar span {font-weight: 600;}
+
+.timer {
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    width: 50px;  
+} 
 
 .imageContainer {
     height: 180px;
@@ -201,4 +204,36 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+ol {
+    width: 300px;
+    color: black;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboardHeading {
+    font-weight: 600;
+    border-bottom: 1px solid black;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.error { 
+    border: 1px solid red; 
+    color: red;
+    animation-duration: 0.5s;
+}
+
+.backButton {
+    width: auto;
+    justify-self: flex-start;
+    align-self: flex-start;
 }

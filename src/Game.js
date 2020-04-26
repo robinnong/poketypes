@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import PokemonName from './PokemonName'
+import { Animated } from "react-animated-css";
 import axios from 'axios';
 
 class Game extends Component {
@@ -8,13 +9,30 @@ class Game extends Component {
         this.state = { 
             // Array of Pokemon
             pokemon: this.returnRandomArray(),
-            gameCounter: 0
+            gameCounter: 0,
+            timer: 10
         }
     }    
 
+    // Starts the timer when Game component is added to the DOM
     componentDidMount() {
-        this.props.startTimer()
-    } 
+        this.interval = setInterval(() => {
+            // Update the countdown every second
+            this.setState({
+                timer: this.state.timer - 1
+            })
+        }, 1000);
+        // End the game when time is out
+        setTimeout(() => { 
+            // endGame will remove the Game component from the DOM 
+            this.props.endGame()
+        }, 10000)
+    }  
+
+    // Clears the timer when Game component is removed from the DOM
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
 
     handleSubmit = (e) => {  
         e.preventDefault();
@@ -26,8 +44,11 @@ class Game extends Component {
             }))
             // Clears the input field if the user's answer is correct
             this.input.value = '';
+            this.input.className = '';
         } else {
             // set an animation on the input field to tell the user their input is incorrect
+            // clear the input?? 
+            this.input.className="error animated shake";
         }
     }
 
@@ -60,16 +81,20 @@ class Game extends Component {
     //             pokemon: this.getPokemonList(res)
     //         })
     //     })
-    // }
+    // }  
  
     render() {
         return (
-            <>   
+            <>
+                <div className="counterBar">
+                    <p className="pokedex">Pokedex: <span>{this.state.gameCounter}</span></p>
+                    <p className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> <span>{this.state.timer}</span></p>
+                </div>
                 <PokemonName
                     pokemonName={this.state.pokemon[this.state.gameCounter]}
                 />
-                <div className="imageContainer">
-                    <img className="pokemonImage" src={require("./assets/vaporeon.png")} alt=""/> 
+                <div className="imageContainer"> 
+                    <img className="pokemonImage" src={require("./assets/vaporeon.png")} alt=""/>  
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="word">Type the pokemon name to catch!</label>

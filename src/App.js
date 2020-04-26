@@ -1,40 +1,50 @@
 import React, { Component } from 'react';
-import './App.css'; 
-import Footer from './Footer.js';
+import './App.css';  
 import Game from './Game.js'; 
 import Landing from './Landing.js';
 import GameOver from './GameOver.js'
+import Leaderboard from './Leaderboard.js'
 
 class App extends Component {  
   constructor() {
     super();
     this.state = {
-      // On page load, render the Landing Page
-      gameState: this.renderGame(),
-      counter: "", 
+      // Renders landing page on page load  
+      gameState: <Landing
+        startGame={() => this.startGame()}
+        showLeaderboard={() => this.showLeaderboard()}
+      />,
+      counter: 0, 
       // set 1 minute timer
-      timer: ""
+      timer: 10
     } 
+  } 
+
+  showLeaderboard = () => {
+    //code to show a modal with the high scores
+    this.setState({
+      gameState: <Leaderboard 
+        showHome={() => this.renderLandingPage()}
+      />
+    })
   }
 
-  setTimer = () => {  
-      const interval = setInterval(() => {
-        // Update the countdown every second
-        this.setState({
-          timer: this.state.timer - 1
-        })
-      }, 1000); 
-      // Stop the countdown after 60 seconds
-      setTimeout(() => {
-        clearInterval(interval) 
-        // Show the game over message with Game Over animation
-        this.setState({
-          gameState: <GameOver 
-          pokedex={this.state.counter}
-          playAgain={() => this.startGame()}
-          />
-        })
-      }, 10000)
+  renderLandingPage = () => {
+    this.setState({
+      gameState: <Landing
+        startGame={() => this.startGame()}
+        showLeaderboard={() => this.showLeaderboard()}
+      />
+    }) 
+  }
+
+  endGame = () => {
+    this.setState({
+      gameState: <GameOver
+        pokedex={this.state.counter}
+        playAgain={() => this.startGame()}
+      />
+    })
   }
 
   addScore = () => { 
@@ -47,39 +57,24 @@ class App extends Component {
   startGame = () => {
     this.setState({
       gameState: <Game   
-      startTimer={() => this.setTimer()}
-      scoreFunction = {() => this.addScore()}
-      time = {this.state.timer}
+        endGame={() => this.endGame()}
+        scoreFunction={() => this.addScore()}   
       />,
-      timer: 10,
-      counter: 0
+      counter:0
     })
-  }
-
-  // Render landing page on page load (this is a method on the page state)
-  renderGame() { 
-    return (
-      <Landing 
-        onClick={() => this.startGame()}
-      />
-    );
-  }
-
+  } 
+ 
   // Add a game mode (easy, medium, hard)
   render(){ 
     return (
       <div className="App"> 
         <main>
           <div className="wrapper">
-            <div className="counterBar">
-              <p className="pokedex">Pokedex: <span>{this.state.counter}</span></p>
-              <p className="timer">Timer: <span>{this.state.timer}</span></p>
-            </div>
             {this.state.gameState} 
           </div>
         </main>
         <footer>
-          <p>© 2020 <a href="https://www.robinnong.com">Robin Nong</a>. View the code <a href="https://github.com/robinnong/poketypes">here</a>.</p>
+          <p>© 2020 <a href="https://robinnong.com">Robin Nong</a>. View the code <a href="https://github.com/robinnong/poketypes">here</a>.</p>
         </footer>
       </div>
     )
