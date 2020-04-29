@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/poketypes/static/css/main.a2f4b356.chunk.css",
+    "main.js": "/poketypes/static/js/main.66a0da53.chunk.js",
+    "main.js.map": "/poketypes/static/js/main.66a0da53.chunk.js.map",
+    "runtime-main.js": "/poketypes/static/js/runtime-main.5f56d3e3.js",
+    "runtime-main.js.map": "/poketypes/static/js/runtime-main.5f56d3e3.js.map",
+    "static/js/2.03e1680f.chunk.js": "/poketypes/static/js/2.03e1680f.chunk.js",
+    "static/js/2.03e1680f.chunk.js.map": "/poketypes/static/js/2.03e1680f.chunk.js.map",
+    "index.html": "/poketypes/index.html",
+    "precache-manifest.051cafa602eb48f2ff36d1eb77048de6.js": "/poketypes/precache-manifest.051cafa602eb48f2ff36d1eb77048de6.js",
+    "service-worker.js": "/poketypes/service-worker.js",
+    "static/css/main.a2f4b356.chunk.css.map": "/poketypes/static/css/main.a2f4b356.chunk.css.map",
+    "static/js/2.03e1680f.chunk.js.LICENSE.txt": "/poketypes/static/js/2.03e1680f.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/poketypes/static/media/treeBackground2.8584fd23.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5f56d3e3.js",
+    "static/js/2.03e1680f.chunk.js",
+    "static/css/main.a2f4b356.chunk.css",
+    "static/js/main.66a0da53.chunk.js"
+  ]
+}
