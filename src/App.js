@@ -16,7 +16,7 @@ class App extends Component {
         showLeaderboard={() => this.showLeaderboard()}
       />,
       counter: 0, 
-      timer: 20,
+      timer: 30,
       users: []
     } 
   } 
@@ -43,7 +43,7 @@ class App extends Component {
     })
   }
 
-  // When button is clicked, get the data from Firebase
+  // Renders the Leaderboard component 
   showLeaderboard = () => {
     this.setState({
       gameState: <Leaderboard 
@@ -54,6 +54,7 @@ class App extends Component {
     }) 
   }
 
+  // Renders the Landing page component
   renderLandingPage = () => {
     this.setState({
       gameState: <Landing
@@ -63,10 +64,12 @@ class App extends Component {
     }) 
   }
 
+  // Calls the function to get data from firebase whenever App loads
   componentDidMount() {
     this.getHighScores() 
   }
 
+  // Renders the Game Over component 
   endGame = () => {
     this.setState({
       gameState: <GameOver
@@ -78,24 +81,24 @@ class App extends Component {
     })
   }
 
+  // Increments the score 
   addScore = () => { 
     this.setState({
       counter: this.state.counter + 1
     })
   }
 
-  // When user clicks "Start Game" button, set tate to render Game and remove Landing page
+  // When user clicks "Start Game", render Game and remove Landing page from DOM
   startGame = () => {
     this.setState({
       gameState: <Game   
         endGame={() => this.endGame()}
         scoreFunction={() => this.addScore()}   
       />,
-      counter:0
+      counter: 0
     })
   }
 
-  // Add a game mode (easy, medium, hard)?? Or add an option to choose a Pokemon generation 
   render(){ 
     return (
       <div className="App"> 

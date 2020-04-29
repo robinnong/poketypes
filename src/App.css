@@ -169,10 +169,16 @@ input {
     letter-spacing: 2px;
     text-align: center; 
     background-color: #70C0A0;
-    border-bottom: 2px solid white;
+    border-radius: 5px;
+    border: 2px solid white;
     width: 100%;
-    margin: 20px 0;
 } 
+
+input:active,
+input:focus {
+    border-radius: 5px;
+    border: 2px solid rgb(255, 217, 0);
+}
 
 .counterBar {
     width: 80%;
@@ -252,6 +258,20 @@ footer {
     border-bottom: 1px solid white;
 }
 
+.inputContainer {
+    position: relative;
+    margin: 20px 0;
+}
+
+.characterCount {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0; 
+    font-size: 1.8rem;
+    color: rgb(60, 60, 60);
+}
+
 /* Leaderboard Style */ 
 .leaderboard { 
     position: relative; 
@@ -282,7 +302,7 @@ ol {margin-top: 40px;}
 li {
     display: flex;
     justify-content: space-between;
-    padding: 12px 20px; 
+    padding: 12px; 
 } 
 
 li:not(:last-of-type) {

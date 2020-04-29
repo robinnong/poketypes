@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 firebase.js
+setupTests.js
+serviceWorker.js
+App.test.js
+.json
 
 # testing
 /coverage
