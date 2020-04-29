@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';  
+import firebase from './firebase';
 import Game from './Game.js'; 
 import Landing from './Landing.js';
-import GameOver from './GameOver.js'
-import Leaderboard from './Leaderboard.js'
+import GameOver from './GameOver.js';
+import Leaderboard from './Leaderboard.js'; 
 
 class App extends Component {  
   constructor() {
@@ -15,18 +16,41 @@ class App extends Component {
         showLeaderboard={() => this.showLeaderboard()}
       />,
       counter: 0, 
-      // set 1 minute timer
-      timer: 10
+      timer: 20,
+      users: []
     } 
   } 
 
+  // Get the highscores saved in Firebase  
+  getHighScores = () => {
+    // Sets up listener to firebase database
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', (result) => {
+      // Gets all data from Firebase
+      const data = result.val();
+      const userObjects = [];
+      // Extracts only the objects containing name and score
+      for (let key in data) {
+        userObjects.push(data[key])
+      }
+      // Sorts the array of users by their score
+      userObjects.sort((a, b) => b.score - a.score);
+      // Saves only the top 10 high scores and usernames
+      const topScores = userObjects.slice(0, 10)
+      this.setState({
+        users: topScores
+      })
+    })
+  }
+
+  // When button is clicked, get the data from Firebase
   showLeaderboard = () => {
-    //code to show a modal with the high scores
     this.setState({
       gameState: <Leaderboard 
-        showHome={() => this.renderLandingPage()}
+        showHome={() => this.renderLandingPage()} 
+        users={this.state.users}
       />
-    })
+    }) 
   }
 
   renderLandingPage = () => {
@@ -38,12 +62,18 @@ class App extends Component {
     }) 
   }
 
+  componentDidMount() {
+    this.getHighScores() 
+  }
+
   endGame = () => {
     this.setState({
       gameState: <GameOver
-        pokedex={this.state.counter}
-        playAgain={() => this.startGame()}
-      />
+        pokedex={this.state.counter} 
+        finalScore={this.state.counter}
+        showHome={() => this.renderLandingPage()}
+      />,
+      scores: this.state.counter
     })
   }
 
@@ -62,8 +92,8 @@ class App extends Component {
       />,
       counter:0
     })
-  } 
- 
+  }
+
   // Add a game mode (easy, medium, hard)
   render(){ 
     return (

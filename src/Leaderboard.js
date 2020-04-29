@@ -1,36 +1,30 @@
-import React, { Component } from 'react';
-import UserData from './UserData'
+import React, { Component } from 'react'; 
+import UserScores from './UserScores';
 
-class Leaderboard extends Component {
-    constructor() {
-        super();
-        this.state = {
-            usernames: ["user1", "user2", "user3"],
-            scores: [2323, 234, 123]
-        }
-    }
-
+class Leaderboard extends Component {  
+ 
     render() {
-        return(
+        return( 
             <>
-                <button className="backButton" onClick={this.props.showHome} type="button"><i class="fas fa-arrow-left"></i> Back to Home</button> 
+                <button className="homeButton" onClick={this.props.showHome}>
+                    <i className="fas fa-home"></i>
+                </button> 
                 <div className="leaderboard">
-                    <ol>
-                        <li className="leaderboardHeading">
-                            <p>Username</p>
-                            <p>Score</p>
-                        </li>
-                        {this.state.usernames.map((username, index) => {
+                    <h3>Leaderboard</h3>
+                    <i className="fas fa-crown"></i>
+                    <ol> 
+                        {this.props.users.map((user, index) => {
                             return (
-                            <UserData
-                            key={index}
-                            name={username}
-                                score={this.state.scores[index]}
+                                <UserScores
+                                    key={index}
+                                    rank={index+1}
+                                    name={user.name}
+                                    score={user.score}
                                 />
-                                )})
-                            }
+                            )})
+                        }
                     </ol>
-                </div>
+                </div>  
             </>
         )
     }
