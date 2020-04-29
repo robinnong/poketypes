@@ -48,7 +48,8 @@ class App extends Component {
     this.setState({
       gameState: <Leaderboard 
         showHome={() => this.renderLandingPage()} 
-        users={this.state.users}
+        users={this.state.users} 
+        display={this.state.leaderDisplay}
       />
     }) 
   }
