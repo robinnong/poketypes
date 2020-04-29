@@ -95,7 +95,7 @@ class App extends Component {
     })
   }
 
-  // Add a game mode (easy, medium, hard)
+  // Add a game mode (easy, medium, hard)?? Or add an option to choose a Pokemon generation 
   render(){ 
     return (
       <div className="App"> 

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import UserScores from './UserScores';
 
 class Leaderboard extends Component {  
- 
     render() {
         return( 
             <>
                 <button className="homeButton" onClick={this.props.showHome}>
-                    <i className="fas fa-home"></i>
+                    <i className="fas fa-home" aria-hidden="true"></i>
+                    <span>Back to Home</span>
                 </button> 
                 <div className="leaderboard">
                     <h3>Leaderboard</h3>

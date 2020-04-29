@@ -37,34 +37,44 @@ class Game extends Component {
         })
     }  
 
-    // Clears the timer when Game component is removed from the DOM, even if the user clicks the home button 
+    // Clears timer when Game component is removed from the DOM
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
     handleSubmit = (e) => {  
         e.preventDefault();
-        const name = this.input.value
+        // Gets the user's input
+        const input = this.input.value;
+        // Changes the input to lowercase, matching the format of the string from the API
+        const name = input.toLowerCase();
+
+        // Validates the user's answer
         if (name === this.state.pokemon[this.state.gameCounter]) {
+            // Increments the score
             this.props.scoreFunction()
+            // Increments the game counter
             this.setState(prevState => ({
                 gameCounter: prevState.gameCounter + 1,
                 gameCounterPlus1: prevState.gameCounterPlus1 + 1
             }))
-            // Clears the input field if the user's answer is correct
+            // Clears the input field if the answer is correct
             this.input.value = '';
             this.input.className = ''; 
+            // Gets the image for the next Pokemon
             this.getPokemonImage(this.state.pokemon[this.state.gameCounterPlus1])  
         } else {
-            // set an animation on the input field to tell the user their input is incorrect 
+            // If wrong, animates the input field to tell user their input is incorrect 
             this.input.className="error animated shake";
         }
     }
 
     // Get a randomized array of Pokemon that we get from the API
     getPokemonList = (res) => { 
+        // Copies the API call results to a new array
         const newArray = [...res.data.results];
-        // const newArray = [...res]; 
+
+        // Randomizes the order of the array
         for (let i = newArray.length - 1; i > 0; i--) {
             const randomIndex = Math.floor(Math.random() * newArray.length);
             const tempIndex = newArray[i];
@@ -72,11 +82,13 @@ class Game extends Component {
             newArray[randomIndex] = tempIndex;
         }  
 
+        // Since the API call gave back an array of objects, get only the names inside of each object and save to a new array
         let newArrayNames = [] 
         newArray.forEach((object) => {
             newArrayNames.push(object.name) 
         })
 
+        // Saves the array of Pokemon names to the component state
         this.setState({
             pokemon: newArrayNames, 
         })  
@@ -85,7 +97,7 @@ class Game extends Component {
         this.getPokemonImage(newArrayNames[0]) 
     }     
 
-    // Need to use a different endpoint to grab the images AFTER generating the array of Pokemon names. Only grabbing the images we need.
+    // Making another API call because we need to use a different endpoint to grab the images AFTER generating the array of Pokemon names. 
     getPokemonImage = (pokeName) => {
         axios({
             url: `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
@@ -93,13 +105,12 @@ class Game extends Component {
             responseType: 'json'
         }).then((res) => {
             const thisImage = res.data.sprites.front_default
+            // Saves the new image to the component state
             this.setState({
                 image: thisImage
             })
-            console.log(thisImage)
         })
     } 
-    
 
     render() {
         return (
@@ -112,12 +123,11 @@ class Game extends Component {
                 <div className="imageContainer">  
                     <img className="pokemonImage" src={this.state.image} alt="" /> 
                 </div>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="word">Type the pokemon name to catch!</label>
+                <form onSubmit={this.handleSubmit}> 
+                    <label htmlFor="word">Click the enter key to submit</label>
                     <input type="text" id="word" ref={(userInput) => this.input =
                         userInput} autoFocus="autoFocus" autoComplete="off" />    
                 </form> 
-                <p>Click the enter key to submit</p>
             </>
         )
     }

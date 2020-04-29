@@ -38,7 +38,7 @@ class GameOver extends Component {
                 <form action="" onSubmit={this.addToFirebase}>
                     <label htmlFor="username">Username (max. 15 characters)</label>
                     <input type="text" id="username" name="username" maxLength="15" required value={this.state.userName} onChange={this.handleUserInput}/>
-                    <button>Submit your score</button>
+                    <button type="submit" className="endButton">Submit your score</button>
                 </form>
             </div>
         )
