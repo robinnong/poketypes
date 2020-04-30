@@ -1,51 +1,15 @@
 import React, { Component } from 'react'; 
-import firebase from './firebase';
 
 class GameOver extends Component {
-    constructor() {
-        super();
-        this.state = {
-            userName: "",
-            characterCount: 15
-        }
-    }
-
-    // Adds user's score and username to Firebase 
-    addToFirebase = (e) => {
-        e.preventDefault();
-        // Adds the final score to the leaderboard
-        const dbRef = firebase.database().ref()   
-        const userName = this.state.userName
-        const userScore = this.props.finalScore
-        const pushThis = { name: userName, score: userScore }
-        dbRef.push(pushThis) 
-        // Goes back to home page after registering high score
-        this.props.showHome()
-    }
-
-    // Saves the user's input (as username)
-    handleUserInput = (e) => {
-        // Remaining characters out of 15 max
-        const remainingChar = 15 - e.target.value.length
-        this.setState({
-            userName: e.target.value,
-            characterCount: remainingChar
-        }) 
-    } 
-
     render() {
         return (
             <div>
-                <h2>Game Over</h2>
-                <p className="endMessage">You caught {this.props.pokedex} Pokemon!</p> 
-                <form action="" className="usernameForm" onSubmit={this.addToFirebase}>
-                    <label htmlFor="username">Submit your username</label>
-                    <div className="inputContainer">
-                        <input type="text" id="username" name="username" maxLength="15" required value={this.state.userName} onChange={this.handleUserInput}/>
-                        <p className="characterCount">max characters: {this.state.characterCount}</p>
-                    </div>
-                    <button type="submit" className="endButton">Submit score</button>
-                </form>
+                <h2 className="animated bounceIn">Game Over</h2>
+                <p className="endMessage">You caught <span>{this.props.finalScore}</span> Pokemon!</p>  
+                <div className="buttonContainer">
+                    <button type="button" className="replayButton" onClick={this.props.replay}>Replay<i class="fas fa-reply"></i></button>
+                    <button type="button" className="nextButton" onClick={this.props.submitUsername}>Next<i class="fas fa-share"></i></button>
+                </div>
             </div>
         )
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';  
 import axios from 'axios'; 
+import pokeball from './assets/pokeball-bw.png';
 
 class Game extends Component {
     constructor() {
@@ -9,7 +10,7 @@ class Game extends Component {
             image: "",
             gameCounter: 0,
             gameCounterPlus1: 1,
-            timer: 30
+            timer: 10
         }
     }    
 
@@ -26,14 +27,14 @@ class Game extends Component {
             }
         }, 1000);   
 
-        const randomOffset = Math.floor(Math.random() * 600);
-        axios({
-            url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=30`,
-            method: 'GET',
-            responseType: 'json'
-        }).then((res) => {
-            this.getPokemonList(res)
-        })
+        // const randomOffset = Math.floor(Math.random() * 600);
+        // axios({
+        //     url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=30`,
+        //     method: 'GET',
+        //     responseType: 'json'
+        // }).then((res) => {
+        //     this.getPokemonList(res)
+        // })
     }  
 
     // Clears timer when Game component is removed from the DOM
@@ -99,26 +100,26 @@ class Game extends Component {
     }     
 
     // Making another API call because we need to use a different endpoint to grab the images AFTER generating the array of Pokemon names. 
-    getPokemonImage = (pokeName) => {
-        axios({
-            url: `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
-            method: 'GET',
-            responseType: 'json'
-        }).then((res) => {
-            const thisImage = res.data.sprites.front_default
-            // Saves the new image to the component state
-            this.setState({
-                image: thisImage
-            })
-        })
-    } 
+    // getPokemonImage = (pokeName) => {
+    //     axios({
+    //         url: `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
+    //         method: 'GET',
+    //         responseType: 'json'
+    //     }).then((res) => {
+    //         const thisImage = res.data.sprites.front_default
+    //         // Saves the new image to the component state
+    //         this.setState({
+    //             image: thisImage
+    //         })
+    //     })
+    // } 
 
     render() {
         return (
             <>
                 <div className="counterBar">
-                    <p className="pokedex">Pokedex: <span>{this.state.gameCounter}</span></p>
-                    <p className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> <span>{this.state.timer}</span></p>
+                    <p className="pokedex"><img src={pokeball} alt="" className="pokeballIcon"/><span>{this.state.gameCounter}</span></p>
+                    <p className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> 0:<span>{this.state.timer}</span></p>
                 </div>
                 <div className="speechBubble">
                     <p className="pokemonName">{this.state.pokemon[this.state.gameCounter]}</p>

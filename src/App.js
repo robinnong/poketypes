@@ -5,6 +5,7 @@ import Game from './Game.js';
 import Landing from './Landing.js';
 import GameOver from './GameOver.js';
 import Leaderboard from './Leaderboard.js'; 
+import UserSubmit from './UserSubmit';
 
 class App extends Component {  
   constructor() {
@@ -12,8 +13,8 @@ class App extends Component {
     this.state = {
       // Renders landing page on page load  
       gameState: <Landing
-        startGame={() => this.startGame()}
-        showLeaderboard={() => this.renderLeaderboard()}
+        startGame={this.startGame}
+        showLeaderboard={this.renderLeaderboard}
       />,
       counter: 0, 
       timer: 30,
@@ -52,7 +53,7 @@ class App extends Component {
   renderLeaderboard = () => {
     this.setState({
       gameState: <Leaderboard 
-        showHome={() => this.renderLandingPage()} 
+        showHome={this.renderLandingPage} 
         users={this.state.users} 
         display={this.state.leaderDisplay}
       />
@@ -63,8 +64,17 @@ class App extends Component {
   renderLandingPage = () => {
     this.setState({
       gameState: <Landing
-        startGame={() => this.startGame()}
-        showLeaderboard={() => this.renderLeaderboard()}
+        startGame={this.startGame}
+        showLeaderboard={this.renderLeaderboard}
+      />
+    }) 
+  }
+
+  renderUsernameForm = () => {
+    this.setState({
+      gameState: <UserSubmit 
+        finalScore={this.state.counter}
+        showHome={this.renderLandingPage}
       />
     }) 
   }
@@ -84,9 +94,9 @@ class App extends Component {
   endGame = () => {
     this.setState({
       gameState: <GameOver
-        pokedex={this.state.counter} 
         finalScore={this.state.counter}
-        showHome={() => this.renderLandingPage()}
+        replay={this.startGame}
+        submitUsername={this.renderUsernameForm}
       />
     })
   }
