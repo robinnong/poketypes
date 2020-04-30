@@ -51,10 +51,10 @@ class Game extends Component {
         // Validates the user's answer
         if (name === this.state.pokemon[this.state.gameCounter]) {
             // Increments the score
-            this.props.scoreFunction()
-            // Increments the game counter
+            this.setState({
+                gameCounter: this.state.gameCounter + 1,
+            })
             this.setState(prevState => ({
-                gameCounter: prevState.gameCounter + 1,
                 gameCounterPlus1: prevState.gameCounterPlus1 + 1
             }))
             // Clears the input field if the answer is correct
@@ -62,6 +62,8 @@ class Game extends Component {
             this.input.className = ''; 
             // Gets the image for the next Pokemon
             this.getPokemonImage(this.state.pokemon[this.state.gameCounterPlus1])  
+
+            this.props.setScore(this.state.gameCounter)
         } else {
             // If wrong, animates the input field to tell user their input is incorrect 
             this.input.className="error animated shake";
@@ -125,7 +127,7 @@ class Game extends Component {
                     <img className="pokemonImage animated bounce" src={this.state.image} alt="" /> 
                 </div>
                 <form onSubmit={this.handleSubmit}> 
-                    <label htmlFor="word">Click the enter key to submit</label>
+                    <label htmlFor="word">Press enter key to submit</label>
                     <input type="text" id="word" ref={(userInput) => this.input =
                         userInput} autoFocus="autoFocus" autoComplete="off" />    
                 </form> 

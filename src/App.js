@@ -73,8 +73,8 @@ class App extends Component {
   startGame = () => {
     this.setState({
       gameState: <Game
-        endGame={() => this.endGame()}
-        scoreFunction={() => this.addScore()}
+        endGame={this.endGame}
+        setScore={this.setScore}
       />,
       counter: 0
     })
@@ -87,15 +87,14 @@ class App extends Component {
         pokedex={this.state.counter} 
         finalScore={this.state.counter}
         showHome={() => this.renderLandingPage()}
-      />,
-      scores: this.state.counter
+      />
     })
   }
 
-  // Increments the score 
-  addScore = () => { 
+  // Increments the score passed as argument from the Game component
+  setScore = (score) => { 
     this.setState({
-      counter: this.state.counter + 1
+      counter: score
     })
   }
 

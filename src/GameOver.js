@@ -37,7 +37,7 @@ class GameOver extends Component {
         return (
             <div>
                 <h2>Game Over</h2>
-                <p>You caught {this.props.pokedex} Pokemon!</p> 
+                <p className="endMessage">You caught {this.props.pokedex} Pokemon!</p> 
                 <form action="" className="usernameForm" onSubmit={this.addToFirebase}>
                     <label htmlFor="username">Submit your username</label>
                     <div className="inputContainer">
