@@ -13,13 +13,18 @@ class App extends Component {
       // Renders landing page on page load  
       gameState: <Landing
         startGame={() => this.startGame()}
-        showLeaderboard={() => this.showLeaderboard()}
+        showLeaderboard={() => this.renderLeaderboard()}
       />,
       counter: 0, 
       timer: 30,
       users: []
     } 
   } 
+
+  // Calls the function to get data from firebase whenever App loads
+  componentDidMount() {
+    this.getHighScores()
+  }
 
   // Get the highscores saved in Firebase  
   getHighScores = () => {
@@ -44,7 +49,7 @@ class App extends Component {
   }
 
   // Renders the Leaderboard component 
-  showLeaderboard = () => {
+  renderLeaderboard = () => {
     this.setState({
       gameState: <Leaderboard 
         showHome={() => this.renderLandingPage()} 
@@ -59,14 +64,20 @@ class App extends Component {
     this.setState({
       gameState: <Landing
         startGame={() => this.startGame()}
-        showLeaderboard={() => this.showLeaderboard()}
+        showLeaderboard={() => this.renderLeaderboard()}
       />
     }) 
   }
 
-  // Calls the function to get data from firebase whenever App loads
-  componentDidMount() {
-    this.getHighScores() 
+  // When user clicks "Start Game", render Game and remove Landing page from DOM
+  startGame = () => {
+    this.setState({
+      gameState: <Game
+        endGame={() => this.endGame()}
+        scoreFunction={() => this.addScore()}
+      />,
+      counter: 0
+    })
   }
 
   // Renders the Game Over component 
@@ -85,17 +96,6 @@ class App extends Component {
   addScore = () => { 
     this.setState({
       counter: this.state.counter + 1
-    })
-  }
-
-  // When user clicks "Start Game", render Game and remove Landing page from DOM
-  startGame = () => {
-    this.setState({
-      gameState: <Game   
-        endGame={() => this.endGame()}
-        scoreFunction={() => this.addScore()}   
-      />,
-      counter: 0
     })
   }
 

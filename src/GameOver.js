@@ -25,24 +25,26 @@ class GameOver extends Component {
 
     // Saves the user's input (as username)
     handleUserInput = (e) => {
+        // Remaining characters out of 15 max
+        const remainingChar = 15 - e.target.value.length
         this.setState({
             userName: e.target.value,
-            characterCount: e.target.value.length
+            characterCount: remainingChar
         }) 
     } 
 
     render() {
         return (
             <div>
-                <h3>Game Over</h3>
+                <h2>Game Over</h2>
                 <p>You caught {this.props.pokedex} Pokemon!</p> 
-                <form action="" onSubmit={this.addToFirebase}>
-                    <label htmlFor="username">Username (max. 15 characters)</label>
+                <form action="" className="usernameForm" onSubmit={this.addToFirebase}>
+                    <label htmlFor="username">Submit your username</label>
                     <div className="inputContainer">
                         <input type="text" id="username" name="username" maxLength="15" required value={this.state.userName} onChange={this.handleUserInput}/>
-                        <p className="characterCount">{this.state.characterCount}</p>
+                        <p className="characterCount">max characters: {this.state.characterCount}</p>
                     </div>
-                    <button type="submit" className="endButton">Submit your score</button>
+                    <button type="submit" className="endButton">Submit score</button>
                 </form>
             </div>
         )

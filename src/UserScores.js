@@ -1,6 +1,6 @@
 import React from 'react'
 
-function UserScores(props) { 
+const UserScores = (props) => { 
     return (
         <li>
             <div>

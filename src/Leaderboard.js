@@ -9,7 +9,7 @@ class Leaderboard extends Component {
                     <i className="fas fa-home" aria-hidden="true"></i>
                     <span>Back to Home</span>
                 </button> 
-                <div className="leaderboard">
+                <div className="leaderboard animated fadeInUp">
                     <h3>Leaderboard</h3>
                     <i className="fas fa-crown"></i>
                     <ol> 

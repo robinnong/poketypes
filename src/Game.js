@@ -1,5 +1,4 @@
-import React, { Component } from 'react'; 
-import PokemonName from './PokemonName'; 
+import React, { Component } from 'react';  
 import axios from 'axios'; 
 
 class Game extends Component {
@@ -119,9 +118,11 @@ class Game extends Component {
                     <p className="pokedex">Pokedex: <span>{this.state.gameCounter}</span></p>
                     <p className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> <span>{this.state.timer}</span></p>
                 </div>
-                <PokemonName pokemonName={this.state.pokemon[this.state.gameCounter]} />
+                <div className="speechBubble">
+                    <p className="pokemonName">{this.state.pokemon[this.state.gameCounter]}</p>
+                </div>     
                 <div className="imageContainer">  
-                    <img className="pokemonImage" src={this.state.image} alt="" /> 
+                    <img className="pokemonImage animated bounce" src={this.state.image} alt="" /> 
                 </div>
                 <form onSubmit={this.handleSubmit}> 
                     <label htmlFor="word">Click the enter key to submit</label>
