@@ -8,7 +8,7 @@ function Landing(props) {
                 <p>Test your typing skills and catch as many Pokemon as you can!</p>
                 <p>Type the names of Pokemon as they appear on the screen.</p>
             </div>
-            <div className="landingButtons">
+            <div className="buttonContainer">
                 <button className="startButton" type="button" onClick={props.startGame}>Start Game</button>
                 <button className="leaderboardButton" type="button" onClick={props.showLeaderboard}>Leaderboard</button>
             </div>

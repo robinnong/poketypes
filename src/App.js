@@ -16,8 +16,7 @@ class App extends Component {
         startGame={this.startGame}
         showLeaderboard={this.renderLeaderboard}
       />,
-      counter: 0, 
-      timer: 30,
+      counter: 0,  
       users: []
     } 
   } 

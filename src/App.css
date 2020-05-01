@@ -93,7 +93,7 @@ button {
     font-weight: 700;
     color: white; 
     cursor: pointer;    
-    transition: all 0.3s;
+    transition: all 0.2s;
 } 
 
 main {
@@ -196,14 +196,14 @@ footer {
 .startButton:focus, 
 .endButton:focus {
     background-color: #548bdf;
-    border-bottom: 6px solid #4678c4; 
+    border-bottom: 6px solid #4678c4;  
 }
 
 .leaderboardButton:hover,  
 .leaderboardButton:focus {
     background-color: #bd4e85; 
     border-bottom: 6px solid #a04271;
-}
+} 
 
 .homeButton {
     position: absolute;
@@ -218,6 +218,22 @@ footer {
 .homeButton:hover,
 .homeButton:focus {
     border-bottom: 1px solid white;
+}
+
+.loading img {
+    height: 50px;
+    width: 50px;
+    margin: 0 auto; 
+    animation: rotation 3s infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .counterBar { 
@@ -331,8 +347,8 @@ footer {
 }
 
 .pokemonImage { 
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     position: absolute;
     bottom: 0px;
     right: 0;
@@ -350,6 +366,7 @@ footer {
 .buttonContainer {
     margin: 0 auto; 
     display: flex;  
+    justify-content: center;
 }
 
 .endMessage {
@@ -441,25 +458,28 @@ li:not(:last-of-type) {
 
     main { 
         background-size: 400%;
-        padding: 80px 0;
+        padding: 50px 0;
     } 
 
     form {width: 100%;}
 
-    .buttonContainer,
-    .landingButtons{
-        flex-direction: column;
-        align-items: center;
+    button {
+        margin: 5px 0;
+        width: 100%;
     }
 
+    .buttonContainer {
+        flex-direction: column;
+        align-items: center;
+        width: 180px;
+    } 
     .leaderboard {
         width: 100%;
     }
 
     li {padding: 10px 0;}
 
-    .counterBar {  
-        top: -60px;  
+    .counterBar {   
         padding: 5px 10px;
         border-radius: 5px;
     }
