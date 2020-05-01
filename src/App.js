@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';  
 import firebase from './firebase';
+import './App.css';  
 import Game from './Game.js'; 
 import Landing from './Landing.js';
 import GameOver from './GameOver.js';
@@ -11,7 +11,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      // Renders landing page on page load  
+      // Initial state - Renders the landing page on page load  
       gameState: <Landing
         startGame={this.startGame}
         showLeaderboard={this.renderLeaderboard}
@@ -22,12 +22,12 @@ class App extends Component {
     } 
   } 
 
-  // Calls the function to get data from firebase whenever App loads
+  // Calls function to get data from firebase whenever App loads so it's already available when Leaderboard is mounted (no waiting)
   componentDidMount() {
     this.getHighScores()
   }
 
-  // Get the highscores saved in Firebase  
+  // Gets the highscores saved in Firebase 
   getHighScores = () => {
     // Sets up listener to firebase database
     const dbRef = firebase.database().ref();
@@ -70,6 +70,7 @@ class App extends Component {
     }) 
   }
 
+  // Renders the Username Form component
   renderUsernameForm = () => {
     this.setState({
       gameState: <UserSubmit 

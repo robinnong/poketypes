@@ -1,5 +1,6 @@
 import React, { Component } from 'react';  
 import axios from 'axios'; 
+import PlusOne from './PlusOne'
 import pokeball from './assets/pokeball-bw.png';
 
 class Game extends Component {
@@ -10,7 +11,8 @@ class Game extends Component {
             image: "",
             gameCounter: 0,
             gameCounterPlus1: 1,
-            timer: 10
+            timer: 10,
+            visible: false
         }
     }    
 
@@ -42,8 +44,17 @@ class Game extends Component {
         clearInterval(this.interval);
     }
 
+    // Adds the animated "+1" annotation to the score
+    animateScore = () => {
+        // When user scores, animate PlusOne component. On animation ends, unmount the component. 
+        this.setState({
+            visible: !this.state.plusOne
+        }) 
+    }
+
     handleSubmit = (e) => {  
         e.preventDefault();
+
         // Gets the user's input
         const input = this.input.value;
         // Changes the input to lowercase, matching the format of the string from the API
@@ -58,6 +69,10 @@ class Game extends Component {
             this.setState(prevState => ({
                 gameCounterPlus1: prevState.gameCounterPlus1 + 1
             }))
+
+            // Adds an animated +1 annotation to the score
+            this.animateScore()
+
             // Clears the input field if the answer is correct
             this.input.value = '';
             this.input.className = ''; 
@@ -118,14 +133,19 @@ class Game extends Component {
         return (
             <>
                 <div className="counterBar">
-                    <p className="pokedex"><img src={pokeball} alt="" className="pokeballIcon"/><span>{this.state.gameCounter}</span></p>
+                <p className="pokedex"><img src={pokeball} alt="Pokeball icon" className="pokeballIcon"/><span>{this.state.gameCounter}</span>
+                {
+                    this.state.visible
+                    ? <PlusOne unmount={this.animateScore} />
+                    : null
+                }</p>
                     <p className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> 0:<span>{this.state.timer}</span></p>
                 </div>
                 <div className="speechBubble">
                     <p className="pokemonName">{this.state.pokemon[this.state.gameCounter]}</p>
                 </div>     
                 <div className="imageContainer">  
-                    <img className="pokemonImage animated bounce" src={this.state.image} alt="" /> 
+                    <img className="pokemonImage animated bounce" src={this.state.image} alt={this.state.pokemon[this.state.gameCounter]} /> 
                 </div>
                 <form onSubmit={this.handleSubmit}> 
                     <label htmlFor="word">Press enter key to submit</label>

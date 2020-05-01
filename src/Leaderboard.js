@@ -11,7 +11,7 @@ class Leaderboard extends Component {
                 </button> 
                 <div className="leaderboard animated fadeInUp">
                     <h3>Leaderboard</h3>
-                    <i className="fas fa-crown"></i>
+                    <i className="fas fa-crown" aria-hidden="true"></i>
                     <ol> 
                         {this.props.users.map((user, index) => {
                             return (

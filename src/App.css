@@ -228,9 +228,18 @@ footer {
     justify-content: space-between;
     position: absolute;
     top: -30px;  
+    position: relative;
 }
 
 .counterBar span {font-weight: 600;}
+
+.plusOne {
+    color: #ffd000;
+    font-size: 2.4rem;
+    position: absolute;
+    right: -30px;
+    animation-duration: 1s;
+}
 
 .pokedex, 
 .timer { 
@@ -258,7 +267,7 @@ footer {
     height: 40px;
     margin: 0; 
     border-radius: 50%; 
-    background-color: #ffd000;;
+    background-color: #ffd000;
     padding: 8px;
     position: absolute;
     left: -10px;
@@ -275,7 +284,7 @@ footer {
     font-size: 2.4rem;
     color: #c4934a;
     border-radius: 50%; 
-    background-color: #ffd000;;
+    background-color: #ffd000;
     padding: 8px;
     position: absolute;
     left: -10px;
@@ -411,14 +420,19 @@ li:not(:last-of-type) {
 }
 
 .rank {
-    font-weight: 600;
+    text-align: left;
+    font-weight: 700;
     margin-right: 20px;
+    width: 20px;
 }
 
 .score {
     color: #ff4281;
     font-size: 2.6rem; 
+    font-weight: 700;
 }
+
+.gameOver {margin-top:50px;}
 
 @media (max-width:480px) {
     .wrapper {

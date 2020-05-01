@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class GameOver extends Component {
     render() {
         return (
-            <div>
+            <div className="gameOver">
                 <h2 className="animated bounceIn">Game Over</h2>
                 <p className="endMessage">You caught <span>{this.props.finalScore}</span> Pokemon!</p>  
                 <div className="buttonContainer">
