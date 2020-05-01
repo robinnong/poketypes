@@ -20,28 +20,28 @@ class Game extends Component {
 
     // Starts the timer when Game component is added to the DOM
     componentDidMount() {
-        const randomOffset = Math.floor(Math.random() * 600);
-        axios({
-            url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=30`,
-            method: 'GET',
-            responseType: 'json'
-        }).then((res) => {
-            this.getPokemonList(res)
-        })
+        // const randomOffset = Math.floor(Math.random() * 600);
+        // axios({
+        //     url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=30`,
+        //     method: 'GET',
+        //     responseType: 'json'
+        // }).then((res) => {
+        //     this.getPokemonList(res)
+        // })
     }  
 
     startTimer = () => {
-        // Show a loading screen until first API comes back
-        this.interval = setInterval(() => {
-            // Update the countdown every second
-            this.setState({
-                timer: this.state.timer - 1
-            })
-            if (this.state.timer === 0) {
-                // endGame will remove the Game component from the DOM 
-                this.props.endGame()
-            }
-        }, 1000);  
+        // // Show a loading screen until first API comes back
+        // this.interval = setInterval(() => {
+        //     // Update the countdown every second
+        //     this.setState({
+        //         timer: this.state.timer - 1
+        //     })
+        //     if (this.state.timer === 0) {
+        //         // endGame will remove the Game component from the DOM 
+        //         this.props.endGame()
+        //     }
+        // }, 1000);  
     }
 
     // Clears timer when Game component is removed from the DOM
@@ -89,45 +89,64 @@ class Game extends Component {
         }
     }
 
+    getFilteredPokemonList = (array) => {
+        // Filters out redundant Pokemon names by removing the suffixes ("-altered", "-m", etc.) BUT still shows the iamge variation. Example: pikachu-cosplay will be displayed as "pikachu" and it's image in cosplay form. Female and male Nidoran will both be displayed as "nidoran" but as different images
+        const filteredArray = array.map((item) => {
+            // Still includes these pokemon with hyphenated names (very important)
+            if (item.includes("mime") || (item.includes("ho-oh")) || (item.includes("porygon")) || (item.includes("farfetch"))) {
+                return item
+            // Uses regex to delete characters after the dash 
+            } else if (item.includes("-")) {
+                const newStr = item.replace(/-[^-]*$/, '');
+                // Adds the modified item to mapped array
+                return newStr
+            } else {
+                return item
+            }
+        })
+        return filteredArray
+    }
+
     // Get a randomized array of Pokemon that we get from the API
     getPokemonList = (res) => { 
-        // Copies the API call results to a new array
-        const newArray = [...res.data.results];
-        // Randomizes the order of the array
-        for (let i = newArray.length - 1; i > 0; i--) {
-            const randomIndex = Math.floor(Math.random() * newArray.length);
-            const tempIndex = newArray[i];
-            newArray[i] = newArray[randomIndex];
-            newArray[randomIndex] = tempIndex;
-        }  
-        // Since the API call gave back an array of objects, get only the names inside of each object and save to a new array
-        let newArrayNames = [] 
-        newArray.forEach((object) => {
-            newArrayNames.push(object.name) 
-        })
-        // Saves the array of Pokemon names to the component state
-        this.setState({
-            pokemon: newArrayNames, 
-            loadComplete: true
-        })  
-        // Makes sure that the first Pokemon image is loaded 
-        this.getPokemonImage(newArrayNames[0]) 
-        this.startTimer()
+        // // Copies the API call results to a new array
+        // const newArray = [...res.data.results];
+        // // Randomizes the order of the array
+        // for (let i = newArray.length - 1; i > 0; i--) {
+        //     const randomIndex = Math.floor(Math.random() * newArray.length);
+        //     const tempIndex = newArray[i];
+        //     newArray[i] = newArray[randomIndex];
+        //     newArray[randomIndex] = tempIndex;
+        // }  
+        // // Since the API call gave back an array of objects, get only the names inside of each object and save to a new array
+        // let newArrayNames = [] 
+        // newArray.forEach((object) => {
+        //     newArrayNames.push(object.name) 
+        // })
+        // 
+        // // Saves the array of Pokemon names to the component state
+        // this.setState({
+        //     pokemon: this.getFilteredPokemonList(newArrayNames),
+        //     loadComplete: true
+        // })  
+        // // Makes sure that the first Pokemon image is loaded 
+        // this.getPokemonImage(newArrayNames[0]) 
+        // this.startTimer()
     }     
 
     // Making another API call because we need to use a different endpoint to grab the images AFTER generating the array of Pokemon names. 
     getPokemonImage = (pokeName) => {
-        axios({
-            url: `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
-            method: 'GET',
-            responseType: 'json'
-        }).then((res) => {
-            const thisImage = res.data.sprites.front_default
-            // Saves the new image to the component state
-            this.setState({
-                image: thisImage,
-            })
-        })
+        // axios({
+        //     url: `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
+        //     method: 'GET',
+        //     responseType: 'json'
+        // }).then((res) => {
+        //     const thisImage = res.data.sprites.front_default
+        //     // Saves the new image to the component state
+        //     this.setState({
+        //         image: thisImage,
+        //     })
+        // })
     } 
 
     render() {

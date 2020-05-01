@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Landing(props) { 
+const Landing = (props) => { 
     return (
         <div className="landing"> 
             <h1 className="animated bounceIn">PokeTypes</h1>

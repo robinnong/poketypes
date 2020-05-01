@@ -1,17 +1,20 @@
-import React, { Component } from 'react'; 
+import React from 'react'; 
 
-class GameOver extends Component {
-    render() {
-        return (
-            <div className="gameOver">
-                <h2 className="animated bounceIn">Game Over</h2>
-                <p className="endMessage">You caught <span>{this.props.finalScore}</span> Pokemon!</p>  
-                <div className="buttonContainer">
-                    <button type="button" className="replayButton" onClick={this.props.replay}>Replay<i className="fas fa-reply"></i></button>
-                    <button type="button" className="nextButton" onClick={this.props.submitUsername}>Next<i className="fas fa-share"></i></button>
-                </div>
+const GameOver = (props) =>{ 
+    return (
+        <div className="gameOver">
+            <h2 className="animated bounceIn">Game Over</h2>
+            <p className="endMessage">You caught <span>{props.finalScore}</span> Pokemon!</p>  
+            <div className="buttonContainer">
+                <button type="button" className="replayButton" onClick={props.replay}>
+                    Replay<i className="fas fa-reply" aria-hidden="true"></i>
+                </button>
+                <button type="button" className="nextButton" onClick={props.submitUsername}>
+                    Next<i className="fas fa-share" aria-hidden="true"></i>
+                </button>
             </div>
-        )
-    }
+        </div>
+    ) 
 }
+
 export default GameOver; 
