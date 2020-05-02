@@ -1,6 +1,10 @@
+// Dependencies
 import React, { Component } from 'react';
+import Fullscreen from "react-full-screen";
 import firebase from './firebase';
+// Styles
 import './styles.css';  
+// Components
 import Game from './Game.js'; 
 import Landing from './Landing.js';
 import GameOver from './GameOver.js';
@@ -17,13 +21,19 @@ class App extends Component {
         showLeaderboard={this.renderLeaderboard}
       />,
       counter: 0,  
-      users: []
+      users: [],
+      isFull: false,
     } 
   } 
 
   // Calls function to get data from firebase whenever App loads so it's already available when Leaderboard is mounted (no waiting)
-  componentDidMount() {
+  componentDidMount() { 
     this.getHighScores()
+  }
+
+  // Fullscreen Mode enabled by the user when they start the game. They can exit out of full screen by using default back arrow OR by clicking "Exit fullscreen" on the landing page
+  goFull = () => {
+    this.setState({ isFull: !this.state.isFull });
   }
 
   // Gets the highscores saved in Firebase 
@@ -42,9 +52,7 @@ class App extends Component {
       userObjects.sort((a, b) => b.score - a.score);
       // Saves only the top 10 high scores and usernames
       const topScores = userObjects.slice(0, 10)
-      this.setState({
-        users: topScores
-      })
+      this.setState({ users: topScores })
     })
   }
 
@@ -63,6 +71,8 @@ class App extends Component {
   renderLandingPage = () => {
     this.setState({
       gameState: <Landing
+        full={this.props.isFull}
+        exitFullscreen={this.goFull}
         startGame={this.startGame}
         showLeaderboard={this.renderLeaderboard}
       />
@@ -81,6 +91,8 @@ class App extends Component {
 
   // When user clicks "Start Game", render Game and remove Landing page from DOM
   startGame = () => {
+    // Go fullscreen when the game starts
+    this.goFull()
     this.setState({
       gameState: <Game
         endGame={this.endGame}
@@ -103,19 +115,20 @@ class App extends Component {
 
   // Increments the score passed as argument from the Game component
   setScore = (score) => { 
-    this.setState({
-      counter: score
-    })
+    this.setState({ counter: score })
   }
 
   render(){ 
     return (
-      <div className="App">  
-        <main>
-          <div className="wrapper">
+      <div className="App">
+        <Fullscreen
+          enabled={this.state.isFull}
+          onChange={isFull => this.setState({ isFull })}
+        > 
+          <main>  
             {this.state.gameState} 
-          </div>
-        </main> 
+          </main> 
+        </Fullscreen>
       </div>
     )
   }

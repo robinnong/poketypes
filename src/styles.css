@@ -306,7 +306,7 @@ button {
   cursor: pointer;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
-  margin: 0 10px;
+  margin: 0 15px;
 }
 
 input,
@@ -323,10 +323,15 @@ body {
   color: white;
   font-size: 2rem;
   font-family: 'Sen', sans-serif;
-  background-color: #70c08b;
+  min-width: 350px;
   background-image: url(./assets/treeBackground1.png);
   background-position: top;
   background-repeat: repeat-x;
+}
+
+body,
+.fullscreen-enabled {
+  background-color: #70c08b;
 }
 
 main {
@@ -336,14 +341,6 @@ main {
   background-image: url(./assets/treeBackground2.png);
   background-repeat: repeat-x;
   background-position: bottom;
-  padding: 50px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 footer {
@@ -378,8 +375,12 @@ h1, h2, h3 {
   text-shadow: 3px 3px #ff5890;
 }
 
-h1, h2 {
-  font-size: 4.2rem;
+h1 {
+  font-size: 4.8rem;
+}
+
+h2 {
+  font-size: 4.4rem;
 }
 
 h1::first-letter {
@@ -388,23 +389,6 @@ h1::first-letter {
 
 h3 {
   font-size: 2.6rem;
-}
-
-div.wrapper {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 form {
@@ -446,12 +430,44 @@ input:active, input:focus {
   border: 2px solid #ffd900;
 }
 
+.landing,
+.leaderboardComponent,
+.game,
+.gameOver,
+.usernameForm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.gameOver,
+.usernameForm,
 .landing {
-  padding-top: 100px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .landingText {
-  margin: 40px 0 20px 0;
+  margin: 20px 0 30px 0;
+  font-weight: 700;
+  font-size: 2.2rem;
+}
+
+.landingText p {
+  margin-bottom: 5px;
 }
 
 .buttonContainer {
@@ -500,9 +516,11 @@ input:active, input:focus {
 
 .homeButton {
   position: absolute;
-  top: 0;
+  top: -50px;
   z-index: 20;
   margin: 0 auto;
+  width: 170px;
+  padding-bottom: 5px;
   border-bottom: 1px solid transparent;
 }
 
@@ -514,12 +532,35 @@ input:active, input:focus {
   border-bottom: 1px solid white;
 }
 
+.fullscreenToggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #525252;
+  font-weight: 400;
+  font-size: 1.6rem;
+  width: 250px;
+  margin: 0 auto;
+  padding: 5px;
+  background-color: #ffffff99;
+  border-radius: 5px;
+}
+
+.fullscreenToggle:hover, .fullscreenToggle:focus {
+  background-color: #ffffffe6;
+}
+
 /* Leaderboard Style */
+.leaderboardComponent {
+  margin-top: 100px;
+}
+
 .leaderboard {
   position: relative;
   width: 500px;
   padding: 30px 30px 15px 30px;
-  margin: 60px auto 0 auto;
+  margin: 10px auto 0 auto;
   border-radius: 5px;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(87%, white), color-stop(13%, #ffd54a));
   background-image: linear-gradient(0deg, white 87%, #ffd54a 13%);
@@ -556,7 +597,7 @@ li {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 12px 0;
+  padding: 10px 0;
 }
 
 li:not(:last-of-type) {
@@ -612,6 +653,10 @@ li:not(:last-of-type) {
   }
 }
 
+.game {
+  margin-top: 50px;
+}
+
 .counterBar {
   color: black;
   font-weight: 700;
@@ -622,13 +667,28 @@ li:not(:last-of-type) {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  position: absolute;
-  top: 0;
-  position: relative;
 }
 
 .counterBar span {
   font-weight: 600;
+}
+
+.pokemonContainer {
+  width: 100%;
+  height: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .plusOne {
@@ -731,7 +791,7 @@ li:not(:last-of-type) {
   position: relative;
   height: 180px;
   width: 250px;
-  margin-bottom: 50px;
+  margin: 0 auto 50px auto;
   background-image: url(./assets/grass.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -758,14 +818,6 @@ li:not(:last-of-type) {
   font-size: 2.6rem;
 }
 
-.usernameForm {
-  margin-top: 100px;
-}
-
-.usernameForm label {
-  font-weight: 700;
-}
-
 .inputContainer {
   position: relative;
   margin-bottom: 50px;
@@ -783,17 +835,17 @@ li:not(:last-of-type) {
     width: 90%;
   }
   main {
-    background-size: 350%;
+    background-size: 500%;
   }
   form {
     width: 100%;
   }
   button {
-    margin: 5px 0;
+    margin: 10px 0;
     width: 100%;
   }
-  li {
-    padding: 10px 0;
+  .landingText {
+    font-size: 2rem;
   }
   .buttonContainer {
     -webkit-box-orient: vertical;
@@ -807,11 +859,26 @@ li:not(:last-of-type) {
   }
   .leaderboard {
     width: 100%;
+    padding: 20px 30px 15px 30px;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(85%, white), color-stop(15%, #ffd54a));
+    background-image: linear-gradient(0deg, white 85%, #ffd54a 15%);
+  }
+  li {
+    font-size: 1.8rem;
+    padding: 5px 0;
+  }
+  .game {
+    margin-top: 20px;
+  }
+  .score {
+    font-size: 2.2rem;
+  }
+  .pokemonContainer {
+    height: 50%;
   }
   .counterBar {
     padding: 5px 10px;
     border-radius: 5px;
-    top: -30px;
   }
   .imageContainer {
     height: 130px;
@@ -825,26 +892,13 @@ li:not(:last-of-type) {
   .pokemonName {
     font-size: 2.6rem;
   }
-}
-
-.my-node-enter {
-  opacity: 0;
-}
-
-.my-node-enter-active {
-  opacity: 1;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-}
-
-.my-node-exit {
-  opacity: 1;
-}
-
-.my-node-exit-active {
-  opacity: 0;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  -webkit-transform: translateX(300px);
-          transform: translateX(300px);
+  input {
+    font-size: 2.4rem;
+  }
+  .inputContainer {
+    width: 80%;
+  }
+  .usernameForm button {
+    width: 200px;
+  }
 }

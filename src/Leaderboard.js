@@ -4,7 +4,7 @@ import UserScores from './UserScores';
 // This function component only receives props from parent (App.js) and has no state
 const Leaderboard = (props) => {   
     return ( 
-        <>
+        <div className="leaderboardComponent wrapper">
             <button className="homeButton" onClick={props.showHome}>
                 <i className="fas fa-home" aria-hidden="true"></i>
                 <span>Back to Home</span>
@@ -25,7 +25,7 @@ const Leaderboard = (props) => {
                     }
                 </ol>
             </div>  
-        </>
+        </div>
     )
 } 
 

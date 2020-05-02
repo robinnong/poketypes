@@ -1,5 +1,7 @@
+// Dependencies
 import React, { Component } from 'react';  
 import axios from 'axios'; 
+// Components
 import PlusOne from './PlusOne'
 import pokeball from './assets/pokeball-bw.png';
 import loading from './assets/loading.png'; 
@@ -13,22 +15,23 @@ class Game extends Component {
             gameCounter: 0, 
             timer: 60,
             visible: false, 
-            loadComplete: false
+            loadComplete: false 
         }
     }    
 
-    // Starts the timer when Game component is added to the DOM
+    // Make the first API call on page load to get ordered array of Pokemon names
     componentDidMount() { 
         const randomOffset = Math.floor(Math.random() * 600);
         axios({
-            url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=5`,
+            url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=40`,
             method: 'GET',
             responseType: 'json'
         }).then((res) => {
             this.getPokemonList(res)
-        })
+        }) 
     }  
 
+    // Starts the timer 
     startTimer = () => {
         // Show a loading screen until first API comes back
         this.interval = setInterval(() => {
@@ -76,7 +79,7 @@ class Game extends Component {
             this.input.value = '';
             this.input.className = '';  
             // Sets the score in the parent App component
-            this.props.setScore(this.state.gameCounter)
+            this.props.setScore(this.state.gameCounter) 
         } else {
             // If wrong, animates the input field to tell user their input is incorrect 
             this.input.className="error animated shake";
@@ -97,7 +100,7 @@ class Game extends Component {
             } else {
                 return item
             }
-        })
+        }) 
         return filteredArray
     }
 
@@ -116,35 +119,43 @@ class Game extends Component {
         let newArrayNames = [] 
         newArray.forEach((object) => {
             newArrayNames.push(object.name) 
-        })
-        
+        }) 
+
         // Saves the array of Pokemon names to the component state
         this.setState({
             pokemon: this.getFilteredPokemonList(newArrayNames),
         })  
         // Makes sure that the first Pokemon image is loaded 
-        this.loopThis(newArrayNames)
+        this.loopThis(newArrayNames) 
     }     
 
     // Making another API call because we need to use a different endpoint to grab the images AFTER generating the array of Pokemon names. 
     loopThis = (array) => {
         const images = []
+        const promises = []
+        // This is imported from the pokedex-promise-v2 node module
+        const Pokedex = require('pokedex-promise-v2');
+        const P = new Pokedex();
 
+        // Making a array of Promises
         array.forEach((name) => {
-            const Pokedex = require('pokedex-promise-v2');
-            const P = new Pokedex();
-
-            P.resource([`/api/v2/pokemon/${name}`])
-            .then((res) => { 
-                const thisImage = res[0].sprites.front_default 
-                images.push(thisImage)
-            })
+            promises.push(P.resource([`/api/v2/pokemon/${name}`]))
         })
 
+        // Method that fulfill all Promises in the array as a single Promise - so that we get the images in the right order
+        Promise.all([...promises])
+        .then(([...pokemon]) => {  
+            const pokemonArr = pokemon.map((item) => item[0])
+            // Saving all the images in correct order
+            pokemonArr.forEach((pokemon) => { 
+                images.push(pokemon.sprites.front_default)
+            }) 
+        })
+        
+        // Saving the array of images of the component state
         this.setState({
             images: images,
-        }) 
-
+        })  
         // Start the game after 1 second to allow images to load
         setTimeout(() => {
             this.setState({
@@ -156,7 +167,7 @@ class Game extends Component {
 
     render() {
         return (
-            <>
+            <div className="wrapper game">
                 <div className="counterBar">
                     <p className="pokedex"><img src={pokeball} alt="Pokeball icon" className="pokeballIcon"/><span>{this.state.gameCounter}</span>
                     {
@@ -167,7 +178,7 @@ class Game extends Component {
                     <p className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> 0:<span>{this.state.timer}</span></p>
                 </div>
                 {this.state.loadComplete ?
-                    <>
+                    <div className="pokemonContainer">
                         <div className="speechBubble">
                             <p className="pokemonName">{this.state.pokemon[this.state.gameCounter]}</p>
                         </div>     
@@ -179,13 +190,13 @@ class Game extends Component {
                             <input type="text" id="word" ref={(userInput) => this.input =
                                 userInput} autoFocus="autoFocus" autoComplete="off" />    
                         </form> 
-                    </>
+                    </div>
                 : <div className="loading">
                     <h2>Loading...</h2>
                     <img src={loading} alt=""/>
                   </div>
                 }
-            </>
+            </div>
         )
     }
 }

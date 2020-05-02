@@ -7,23 +7,26 @@ body {
     color: white;
     font-size: 2rem;
     font-family: 'Sen', sans-serif;
-
-    background-color: rgb(112, 192, 139);
+    min-width: 350px;
+ 
     background-image: url(./assets/treeBackground1.png);
     background-position: top;
     background-repeat: repeat-x; 
 } 
 
+body,
+.fullscreen-enabled {
+    background-color: #70c08b;
+}
+
 main {
     position: relative;
     text-align: center;  
-    min-height: 100vh;  
+    min-height: 100vh;   
+
     background-image: url(./assets/treeBackground2.png);
     background-repeat: repeat-x;
-    background-position: bottom;  
-    padding: 50px 0; 
-    display: flex;
-    flex-direction: column; 
+    background-position: bottom;   
 }
 
 footer {   
@@ -39,7 +42,7 @@ footer {
     padding: 15px;
     p {line-height: 1.3rem;}
     a {color: #ff5890;}
-}
+} 
 
 h1, h2, h3 {
     font-weight: 400;
@@ -50,19 +53,12 @@ h1, h2, h3 {
 
 h1, h2, h3 {text-shadow: 3px 3px #ff5890;}
 
-h1, h2 { font-size: 4.2rem; } 
+h1 {font-size: 4.8rem; } 
+h2 {font-size: 4.4rem; } 
 
 h1::first-letter {color: #ffd000;}
  
 h3 { font-size: 2.6rem; } 
-
-div.wrapper { 
-    position: relative;  
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
-}
 
 // All forms
 form { 
@@ -99,9 +95,32 @@ input {
         }
 } 
 
-// Landing page component  
-.landing {padding-top:100px;}
-.landingText {margin: 40px 0 20px 0;}
+// Landing page component   
+.landing,
+.leaderboardComponent,
+.game,
+.gameOver,
+.usernameForm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.gameOver,
+.usernameForm,
+.landing {justify-content: center;}
+
+.landingText {
+    margin: 20px 0 30px 0;
+    font-weight: 700; 
+    font-size: 2.2rem;   
+    p {margin-bottom: 5px;}
+}
 
 // Button styles
 .buttonContainer {
@@ -140,22 +159,46 @@ input {
 
 .homeButton {
     position: absolute;
-    top: 0;
+    top: -50px;
     z-index: 20;
     margin: 0 auto;
+    width: 170px;
+    padding-bottom: 5px;
     border-bottom: 1px solid transparent; 
         i { margin-right: 5px; }
         &:hover,
         &:focus {border-bottom: 1px solid white;}
 }
 
+.fullscreenToggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    color: rgb(82, 82, 82);
+    font-weight: 400;
+    font-size: 1.6rem;
+
+    width: 250px;
+    margin: 0 auto;
+    padding: 5px ;
+    
+    background-color: #ffffff99;
+    border-radius: 5px;
+    &:hover,
+    &:focus {background-color:  #ffffffe6;}
+}
+
 /* Leaderboard Style */ 
+.leaderboardComponent { margin-top: 100px; }
+
 .leaderboard { 
     position: relative; 
 
     width: 500px;
     padding: 30px 30px 15px 30px ; 
-    margin: 60px auto 0 auto;
+    margin: 10px auto 0 auto;
 
     border-radius: 5px;    
     background-image: linear-gradient(0deg, rgb(255, 255, 255) 87%, #ffd54a 13%);
@@ -183,7 +226,7 @@ ol {
 li {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0; 
+    padding: 10px 0; 
         &:not(:last-of-type) {border-bottom: 1px solid #dddddd;}
 } 
 
@@ -218,7 +261,9 @@ li {
   to {
     transform: rotate(360deg);
   }
-}
+} 
+ 
+.game {margin-top: 50px;}
 
 // Score and Timer bar
 .counterBar { 
@@ -226,12 +271,18 @@ li {
     font-weight: 700;
     width: 100%; 
     display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 0;
-    position: relative;
+    justify-content: space-between;  
         span {font-weight: 600;}
 } 
+
+.pokemonContainer {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .plusOne {
     position: absolute;
@@ -294,7 +345,7 @@ li {
     animation-duration: 0.3s;
 }
 
-.speechBubble {
+.speechBubble { 
     position: relative;
     color: #202020;
     font-weight: 700;
@@ -328,8 +379,8 @@ li {
     position: relative; 
 
     height: 180px;
-    width: 250px;
-    margin-bottom: 50px;
+    width: 250px; 
+    margin: 0 auto 50px auto;
 
     background-image: url(./assets/grass.png);
     background-size: contain;
@@ -355,10 +406,6 @@ li {
     margin: 40px 0;
         span {font-size: 2.6rem;}
 }
-.usernameForm{
-    margin-top: 100px;
-        label {font-weight: 700;}
-} 
 
 .inputContainer {
     position: relative;
@@ -369,23 +416,23 @@ li {
     position: absolute;
     right: 0; 
     font-size: 1.8rem;
-    color: rgb(60, 60, 60);
+    color: #3c3c3c;
 } 
 
 // Media Queries - for phone 
 @media (max-width:480px) {
     .wrapper {width: 90%;}
 
-    main { background-size: 350%; } 
+    main { background-size: 500%; } 
 
     form {width: 100%;}
 
     button {
-        margin: 5px 0;
+        margin: 10px 0;
         width: 100%;
-    }
-    
-    li {padding: 10px 0;}
+    } 
+
+    .landingText {font-size: 2rem;}
 
     .buttonContainer {
         flex-direction: column;
@@ -393,12 +440,26 @@ li {
         width: 180px;
     } 
 
-    .leaderboard {width: 100%;}
+    .leaderboard {
+        width: 100%;
+        padding: 20px 30px 15px 30px; 
+        background-image: linear-gradient(0deg, rgb(255, 255, 255) 85%, #ffd54a 15%);
+    } 
+
+    li {
+        font-size: 1.8rem;
+        padding: 5px 0;
+    } 
+
+    .game {margin-top: 20px;}
+
+    .score {font-size: 2.2rem;}
+
+    .pokemonContainer { height: 50%; }
 
     .counterBar {   
         padding: 5px 10px;
-        border-radius: 5px;
-        top: -30px;
+        border-radius: 5px; 
     }
 
     .imageContainer {
@@ -411,21 +472,12 @@ li {
         width: 130px;
         height: 130px;  
     }  
-    .pokemonName { font-size: 2.6rem;} 
-}   
 
-.my-node-enter {
-  opacity: 0; 
-}
-.my-node-enter-active {
-  opacity: 1;
-  transition: all 0.5s; 
-}
-.my-node-exit {
-  opacity: 1;
-}
-.my-node-exit-active {
-  opacity: 0;
-  transition: all 0.5s;
-  transform: translateX(300px);
-}
+    .pokemonName { font-size: 2.6rem;}  
+
+    input {font-size: 2.4rem; }
+
+    .inputContainer {width: 80%;}
+
+    .usernameForm button {width: 200px;}
+}    
