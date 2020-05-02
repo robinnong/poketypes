@@ -873,9 +873,6 @@ li:not(:last-of-type) {
   .score {
     font-size: 2.2rem;
   }
-  .pokemonContainer {
-    height: 50%;
-  }
   .counterBar {
     padding: 5px 10px;
     border-radius: 5px;
