@@ -9,8 +9,8 @@ const Landing = (props) => {
                 <p>Type the names of Pokemon as they appear on the screen.</p>
             </div>
             <div className="buttonContainer">
-                <button className="startButton" type="button" onClick={props.startGame}>Start Game</button>
-                <button className="leaderboardButton" type="button" onClick={props.showLeaderboard}>Leaderboard</button>
+                <button className="blueButton" type="button" onClick={props.startGame}>Start Game</button>
+                <button className="redButton" type="button" onClick={props.showLeaderboard}>Leaderboard</button>
             </div>
         </div>
     )

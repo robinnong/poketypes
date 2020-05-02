@@ -9,6 +9,7 @@ setupTests.js
 serviceWorker.js
 App.test.js
 .json
+.vscode
 
 # testing
 /coverage

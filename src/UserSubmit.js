@@ -27,8 +27,10 @@ class UserSubmit extends Component {
     handleUserInput = (e) => {
         // Remaining characters out of 15 max
         const remainingChar = 15 - e.target.value.length
+        // Removes white spaces from start and end if left by user
+        const input = (e.target.value).trim()
         this.setState({
-            userName: e.target.value,
+            userName: input,
             characterCount: remainingChar
         })
     } 
@@ -41,7 +43,7 @@ class UserSubmit extends Component {
                     <input type="text" id="username" name="username" maxLength="15" required autoFocus="autoFocus" value={this.state.userName} onChange={this.handleUserInput}/>
                     <p className="characterCount">max characters: {this.state.characterCount}</p>
                 </div>
-                <button type="submit" className="endButton">Submit score</button>
+                <button type="submit" className="blueButton">Submit score</button>
             </form>
         )
     }

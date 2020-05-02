@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
-import './App.css';  
+import './styles.css';  
 import Game from './Game.js'; 
 import Landing from './Landing.js';
 import GameOver from './GameOver.js';
 import Leaderboard from './Leaderboard.js'; 
-import UserSubmit from './UserSubmit';
+import UserSubmit from './UserSubmit'; 
 
 class App extends Component {  
   constructor() {
@@ -49,7 +49,7 @@ class App extends Component {
   }
 
   // Renders the Leaderboard component 
-  renderLeaderboard = () => {
+  renderLeaderboard = () => { 
     this.setState({
       gameState: <Leaderboard 
         showHome={this.renderLandingPage} 
@@ -86,10 +86,10 @@ class App extends Component {
         endGame={this.endGame}
         setScore={this.setScore}
       />,
-      counter: 0
+      counter: 0 
     })
-  }
-
+  } 
+  
   // Renders the Game Over component 
   endGame = () => {
     this.setState({
@@ -110,15 +110,12 @@ class App extends Component {
 
   render(){ 
     return (
-      <div className="App"> 
+      <div className="App">  
         <main>
           <div className="wrapper">
             {this.state.gameState} 
           </div>
-        </main>
-        <footer>
-          <p>© 2020 <a href="https://robinnong.com">Robin Nong</a>. View the code <a href="https://github.com/robinnong/poketypes">here</a>.</p>
-        </footer>
+        </main> 
       </div>
     )
   }
