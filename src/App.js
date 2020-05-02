@@ -33,7 +33,11 @@ class App extends Component {
 
   // Fullscreen Mode enabled by the user when they start the game. They can exit out of full screen by using default back arrow OR by clicking "Exit fullscreen" on the landing page
   goFull = () => {
-    this.setState({ isFull: !this.state.isFull });
+    this.setState({ isFull: true });
+  }
+
+  exitFull = () => {
+    this.setState({ isFull: false });
   }
 
   // Gets the highscores saved in Firebase 
@@ -71,8 +75,8 @@ class App extends Component {
   renderLandingPage = () => {
     this.setState({
       gameState: <Landing
-        full={this.props.isFull}
-        exitFullscreen={this.goFull}
+        full={this.state.isFull}
+        exitFullscreen={this.exitFull}
         startGame={this.startGame}
         showLeaderboard={this.renderLeaderboard}
       />
