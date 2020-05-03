@@ -500,6 +500,22 @@ input:active, input:focus {
   margin-left: 10px;
 }
 
+.fullscreenButton {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  left: 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+  width: 200px;
+  margin: 0 auto;
+  border-radius: 5px;
+  z-index: 20;
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+}
+
 .redButton, .blueButton {
   padding: 10px 20px;
   border-radius: 5px;

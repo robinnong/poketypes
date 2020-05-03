@@ -23,7 +23,8 @@ class App extends Component {
       counter: 0,  
       users: [],
       isFull: false,
-      footerOn: true
+      footerOn: true,
+      showButton: false
     } 
   } 
 
@@ -45,12 +46,20 @@ class App extends Component {
       const topScores = userObjects.slice(0, 10)
       this.setState({ users: topScores })
     })
+
+    // Fullscreen Mode button shown if user is on mobile
+    const mqlMobile = window.matchMedia('(max-width: 480px)');
+    if (mqlMobile.matches === true) {
+      this.setState({ showButton: true });
+    }
   }
 
-  // Fullscreen Mode enabled by the user when they start the game. 
-  goFull = () => {
-    this.setState({ isFull: true });
-  } 
+  fullscreen = () => {
+    this.setState({ 
+      isFull: true,
+      showButton: false  
+     }) 
+  }
 
   // Renders the Leaderboard component 
   renderLeaderboard = () => { 
@@ -86,9 +95,7 @@ class App extends Component {
   }
 
   // When user clicks "Start Game", render Game and remove Landing page from DOM
-  startGame = () => {
-    // Go fullscreen when the game starts
-    this.goFull()
+  startGame = () => { 
     this.setState({
       gameState: <Game
         endGame={this.endGame}
@@ -113,7 +120,7 @@ class App extends Component {
   // Increments the score passed as argument from the Game component
   setScore = (score) => { 
     this.setState({ counter: score })
-  }
+  } 
 
   render(){ 
     return (
@@ -123,11 +130,12 @@ class App extends Component {
           onChange={isFull => this.setState({ isFull })}
         > 
           <main>  
+            {this.state.showButton ? <button className="fullscreenButton" onClick={this.fullscreen}>Enable Fullscreen Mode</button> : null}
             {this.state.gameState} 
           </main> 
           {this.state.footerOn 
           ? <footer>
-            <p>Code and design by <a href="https://robinnong.com">Robin Nong</a>. Pokémon and Pokémon character names are trademarks of Nintendo. Trademarks are property of respective owners.</p>
+              <p>Code and design by <a href="https://github.com/robinnong">Robin Nong</a>. Pokémon and Pokémon character names are trademarks of Nintendo. Trademarks are property of respective owners.</p>
           </footer>
           : null} 
         </Fullscreen>
