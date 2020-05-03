@@ -473,9 +473,10 @@ li {
     }
 
     .landingText,
-    button,
-    label,
+    button, 
     li { font-size: 1.8rem; }
+
+    label { font-size: 1.6rem; }
     
     .buttonContainer {
         flex-direction: column;

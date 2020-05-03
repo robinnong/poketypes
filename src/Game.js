@@ -12,10 +12,12 @@ class Game extends Component {
         this.state = {  
             pokemon: [],
             images: [],
+            userInput: "",
             gameCounter: 0, 
             timer: 60,
             visible: false, 
-            loadComplete: false 
+            loadComplete: false,
+            className: ""
         }
     }    
 
@@ -23,7 +25,7 @@ class Game extends Component {
     componentDidMount() { 
         const randomOffset = Math.floor(Math.random() * 900);
         axios({
-            url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=40`,
+            url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=45`,
             method: 'GET',
             responseType: 'json'
         }).then((res) => {
@@ -55,28 +57,43 @@ class Game extends Component {
         this.setState({ visible: !this.state.visible }) 
     }
 
-    // When user submits answer, validate it 
+    handleUserInput = (e) => {
+        // Changes the input to lowercase
+        const input = (e.target.value).trim().toLowerCase()
+        // Component state is always aware of user's input
+        this.setState({ userInput: input })
+        console.log(this.state.userInput)
+    }
+
+    // When user presses enter key, validate answer
     handleSubmit = (e) => {  
         e.preventDefault();
-        // Gets the user's input
-        const input = this.input.value;
-        // Changes the input to lowercase, matching the format of the string from the API
-        const name = input.toLowerCase();
+        this.validateAnswer()
+    }
 
+    // When user presses space bar key, validate answer
+    onKeyDown = (e) => {
+        if (e.key === " ") {
+            this.validateAnswer() 
+        } 
+    }
+    
+    validateAnswer = () => { 
         // Validates the user's answer
-        if (name === this.state.pokemon[this.state.gameCounter]) {
+        if (this.state.userInput === this.state.pokemon[this.state.gameCounter]) {
             // Increments the score
             this.setState({ gameCounter: this.state.gameCounter + 1 }) 
             // Adds an animated +1 annotation to the score
-            this.animateScore()
-            // Clears the input field if the answer is correct
-            this.input.value = '';
-            this.input.className = '';  
+            this.animateScore() 
+            this.setState({ 
+                className: "",
+                userInput: ""
+            })
             // Sets the score in the parent App component
             this.props.setScore(this.state.gameCounter) 
         } else {
-            // If wrong, animates the input field to tell user their input is incorrect 
-            this.input.className="error animated shake";
+            // If wrong, animates the input field to tell user their input is incorrect  
+            this.setState({ className: "error animated shake" })
         }
     }
 
@@ -172,10 +189,9 @@ class Game extends Component {
                         <div className="imageContainer">  
                             <img className="pokemonImage" src={this.state.images[this.state.gameCounter]} alt={this.state.pokemon[this.state.gameCounter]} /> 
                         </div>
-                        <form onSubmit={this.handleSubmit}> 
-                            <label htmlFor="word">Press enter key to submit</label>
-                            <input type="text" id="word" ref={(userInput) => this.input =
-                                userInput} autoFocus="autoFocus" autoComplete="off" />    
+                        <form onSubmit={this.handleSubmit} onKeyDown={this.onKeyDown}> 
+                            <label htmlFor="word">Press enter or spacebar to submit</label>
+                            <input className={this.state.className} type="text" id="word" autoFocus="autoFocus" autoComplete="off" value={this.state.userInput} onChange={this.handleUserInput} />    
                         </form> 
                     </div>
                 : <div className="loading">
