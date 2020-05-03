@@ -4,7 +4,7 @@ const GameOver = (props) =>{
     return (
         <div className="gameOver wrapper">
             <h2 className="animated bounceIn">Game Over</h2>
-            <p className="endMessage animated fadeInUp">You caught <span>{props.finalScore}</span> Pokemon!</p>  
+            <h3 className="endMessage animated fadeInUp">You caught <span>{props.finalScore}</span> Pokemon!</h3>  
             <div className="buttonContainer">
                 <button type="button" className="redButton" onClick={props.replay}>
                     Replay<i className="fas fa-reply" aria-hidden="true"></i>

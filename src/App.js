@@ -23,6 +23,7 @@ class App extends Component {
       counter: 0,  
       users: [],
       isFull: false,
+      footerOn: true
     } 
   } 
 
@@ -34,11 +35,7 @@ class App extends Component {
   // Fullscreen Mode enabled by the user when they start the game. They can exit out of full screen by using default back arrow OR by clicking "Exit fullscreen" on the landing page
   goFull = () => {
     this.setState({ isFull: true });
-  }
-
-  exitFull = () => {
-    this.setState({ isFull: false });
-  }
+  } 
 
   // Gets the highscores saved in Firebase 
   getHighScores = () => {
@@ -67,7 +64,8 @@ class App extends Component {
         showHome={this.renderLandingPage} 
         users={this.state.users} 
         display={this.state.leaderDisplay}
-      />
+      />,
+      footerOn: false
     }) 
   }
 
@@ -75,11 +73,10 @@ class App extends Component {
   renderLandingPage = () => {
     this.setState({
       gameState: <Landing
-        full={this.state.isFull}
-        exitFullscreen={this.exitFull}
         startGame={this.startGame}
         showLeaderboard={this.renderLeaderboard}
-      />
+      />,
+      footerOn: true
     }) 
   }
 
@@ -102,7 +99,8 @@ class App extends Component {
         endGame={this.endGame}
         setScore={this.setScore}
       />,
-      counter: 0 
+      counter: 0,
+      footerOn: false
     })
   } 
   
@@ -132,6 +130,11 @@ class App extends Component {
           <main>  
             {this.state.gameState} 
           </main> 
+          {this.state.footerOn 
+          ? <footer>
+            <p>Code and design by <a href="https://robinnong.com">Robin Nong</a>. Pokémon and Pokémon character names are trademarks of Nintendo. Trademarks are property of respective owners.</p>
+          </footer>
+          : null} 
         </Fullscreen>
       </div>
     )

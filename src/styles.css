@@ -323,24 +323,24 @@ body {
   color: white;
   font-size: 2rem;
   font-family: 'Sen', sans-serif;
-  min-width: 350px;
-  background-image: url(./assets/treeBackground1.png);
-  background-position: top;
-  background-repeat: repeat-x;
+  min-width: 320px;
 }
 
 body,
 .fullscreen-enabled {
+  background-image: url(./assets/treeBackground1.png);
+  background-repeat: repeat-x;
+  background-position: top;
   background-color: #70c08b;
 }
 
 main {
-  position: relative;
-  text-align: center;
-  min-height: 100vh;
   background-image: url(./assets/treeBackground2.png);
   background-repeat: repeat-x;
   background-position: bottom;
+  position: relative;
+  text-align: center;
+  min-height: 100vh;
 }
 
 footer {
@@ -350,7 +350,7 @@ footer {
   left: 0;
   text-align: center;
   color: #202020;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   background-color: #f0f0f0;
   padding: 15px;
@@ -452,12 +452,23 @@ input:active, input:focus {
           align-items: center;
 }
 
+.usernameForm {
+  width: 100%;
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+}
+
 .gameOver,
 .usernameForm,
 .landing {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.landing {
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
 }
 
 .landingText {
@@ -566,6 +577,8 @@ input:active, input:focus {
   background-image: linear-gradient(0deg, white 87%, #ffd54a 13%);
   -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
           box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
 }
 
 .leaderboard div {
@@ -791,7 +804,7 @@ li:not(:last-of-type) {
   position: relative;
   height: 180px;
   width: 250px;
-  margin: 0 auto 50px auto;
+  margin: 0 auto 20px auto;
   background-image: url(./assets/grass.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -830,12 +843,22 @@ li:not(:last-of-type) {
   color: #3c3c3c;
 }
 
+@media (max-width: 568px) {
+  .leaderboard {
+    width: 100%;
+    padding: 20px 30px 15px 30px;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(85%, white), color-stop(15%, #ffd54a));
+    background-image: linear-gradient(0deg, white 85%, #ffd54a 15%);
+  }
+}
+
 @media (max-width: 480px) {
   .wrapper {
     width: 90%;
   }
   main {
-    background-size: 500%;
+    background-size: 480%;
+    background-position: center;
   }
   form {
     width: 100%;
@@ -843,9 +866,17 @@ li:not(:last-of-type) {
   button {
     margin: 10px 0;
     width: 100%;
+    font-size: 1.8rem;
+  }
+  h1 {
+    font-size: 3.4rem;
   }
   .landingText {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin: 10px auto 20px auto;
+  }
+  .landingText p {
+    line-height: 2rem;
   }
   .buttonContainer {
     -webkit-box-orient: vertical;
@@ -855,13 +886,7 @@ li:not(:last-of-type) {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    width: 180px;
-  }
-  .leaderboard {
-    width: 100%;
-    padding: 20px 30px 15px 30px;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(85%, white), color-stop(15%, #ffd54a));
-    background-image: linear-gradient(0deg, white 85%, #ffd54a 15%);
+    width: 150px;
   }
   li {
     font-size: 1.8rem;
@@ -886,6 +911,9 @@ li:not(:last-of-type) {
     width: 130px;
     height: 130px;
   }
+  .pokemonContainer {
+    height: 100%;
+  }
   .pokemonName {
     font-size: 2.6rem;
   }
@@ -897,5 +925,8 @@ li:not(:last-of-type) {
   }
   .usernameForm button {
     width: 200px;
+  }
+  footer {
+    font-size: 1.2rem;
   }
 }

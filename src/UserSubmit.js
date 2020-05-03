@@ -6,7 +6,8 @@ class UserSubmit extends Component {
         super();
         this.state = {
             userName: "",
-            characterCount: 15
+            characterCount: 15,
+            class: "usernameForm"
         }
     }
 
@@ -18,9 +19,9 @@ class UserSubmit extends Component {
         const userName = this.state.userName
         const userScore = this.props.finalScore
         const pushThis = { name: userName, score: userScore }
-        dbRef.push(pushThis)
-        // Goes back to home page after registering high score
-        this.props.showHome()
+        dbRef.push(pushThis) 
+        // Animate out component - on animation end, it will unmount itself
+        this.animateOut()
     }
 
     // Saves the user's input (as username)
@@ -28,16 +29,22 @@ class UserSubmit extends Component {
         // Remaining characters out of 15 max
         const remainingChar = 15 - e.target.value.length
         // Removes white spaces from start and end if left by user
-        const input = (e.target.value).trim()
+        const input = (e.target.value).trim().toLowerCase()
         this.setState({
             userName: input,
             characterCount: remainingChar
         })
     } 
+
+    animateOut = () => {
+        this.setState({
+            class: "usernameForm animated fadeOutRight"
+        })
+    }
     
     render() {
         return (
-            <form action="" className="usernameForm" onSubmit={this.addToFirebase}>
+            <form action="" className={this.state.class} onSubmit={this.addToFirebase} onAnimationEnd={this.props.showHome}>
                 <label htmlFor="username">Submit your username</label>
                 <div className="inputContainer">
                     <input type="text" id="username" name="username" maxLength="15" required autoFocus="autoFocus" value={this.state.userName} onChange={this.handleUserInput}/>
