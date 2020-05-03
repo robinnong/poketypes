@@ -150,14 +150,20 @@ class Game extends Component {
         return (
             <div className="wrapper game">
                 <div className="counterBar">
-                    <div className="pokedex"><img src={pokeball} alt="Pokeball icon" className="pokeballIcon"/><span>{this.state.gameCounter}</span>
-                    {
-                        this.state.visible
-                        ? <PlusOne unmount={this.animateScore} />
-                        : null
-                    }</div>
-                    <div className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> 0:<span>{this.state.timer}</span></div>
+                    <div className="pokedex">
+                        <img src={pokeball} alt="Pokeball icon" className="pokeballIcon"/>
+                        <span>{this.state.gameCounter}</span>
+                        {
+                            this.state.visible
+                            ? <PlusOne unmount={this.animateScore} />
+                            : null
+                        }
+                    </div>
+                    <div className="timer" aria-label="Timer">
+                        <i className="far fa-clock" aria-hidden="true"></i> 0:<span>{this.state.timer}</span>
+                    </div>
                 </div>
+                
                 {this.state.loadComplete ?
                     <div className="pokemonContainer">
                         <div className="speechBubble">
