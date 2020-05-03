@@ -381,6 +381,7 @@ h1 {
 
 h2 {
   font-size: 4.4rem;
+  margin-bottom: 0;
 }
 
 h1::first-letter {
@@ -740,13 +741,12 @@ li:not(:last-of-type) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.pokedex span {
-  margin-left: 45px;
 }
 
 .pokedex img {
@@ -764,10 +764,6 @@ li:not(:last-of-type) {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-
-.timer span {
-  margin-left: 20px;
 }
 
 .timer i {
@@ -789,6 +785,7 @@ li:not(:last-of-type) {
 
 .speechBubble {
   position: relative;
+  z-index: 20;
   color: #202020;
   font-weight: 700;
   background-color: white;
@@ -850,6 +847,7 @@ li:not(:last-of-type) {
 .inputContainer {
   position: relative;
   margin-bottom: 50px;
+  width: 350px;
 }
 
 .characterCount {
@@ -876,23 +874,27 @@ li:not(:last-of-type) {
     background-size: 480%;
     background-position: center;
   }
-  form {
+  form,
+  button {
     width: 100%;
   }
   button {
     margin: 10px 0;
-    width: 100%;
-    font-size: 1.8rem;
   }
   h1 {
     font-size: 3.4rem;
   }
   .landingText {
-    font-size: 1.8rem;
     margin: 10px auto 20px auto;
   }
   .landingText p {
     line-height: 2rem;
+  }
+  .landingText,
+  button,
+  label,
+  li {
+    font-size: 1.8rem;
   }
   .buttonContainer {
     -webkit-box-orient: vertical;
@@ -905,7 +907,6 @@ li:not(:last-of-type) {
     width: 150px;
   }
   li {
-    font-size: 1.8rem;
     padding: 5px 0;
   }
   .game {
@@ -914,6 +915,7 @@ li:not(:last-of-type) {
   .score {
     font-size: 2.2rem;
   }
+  .speechBubble,
   .counterBar {
     padding: 5px 10px;
     border-radius: 5px;
@@ -930,9 +932,7 @@ li:not(:last-of-type) {
   .pokemonContainer {
     height: 100%;
   }
-  .pokemonName {
-    font-size: 2.6rem;
-  }
+  .pokemonName,
   input {
     font-size: 2.4rem;
   }

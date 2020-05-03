@@ -47,9 +47,9 @@ class App extends Component {
       this.setState({ users: topScores })
     })
 
-    // Fullscreen Mode button shown if user is on mobile
+    // Shows fullscreen mode button if user is on mobile
     const mqlMobile = window.matchMedia('(max-width: 480px)');
-    if (mqlMobile.matches === true) {
+    if (mqlMobile.matches) {
       this.setState({ showButton: true });
     }
   }
@@ -118,9 +118,7 @@ class App extends Component {
   }
 
   // Increments the score passed as argument from the Game component
-  setScore = (score) => { 
-    this.setState({ counter: score })
-  } 
+  setScore = (score) => { this.setState({ counter: score }) } 
 
   render(){ 
     return (

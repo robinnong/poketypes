@@ -7,7 +7,7 @@ class UserSubmit extends Component {
         this.state = {
             userName: "",
             characterCount: 15,
-            class: "usernameForm"
+            class: ""
         }
     }
 
@@ -38,12 +38,12 @@ class UserSubmit extends Component {
 
     // After username is uploaded to firebase, animate out the component. On animation end, the component will unmount
     animateOut = () => {
-        this.setState({ class: "usernameForm animated fadeOutRight" })
+        this.setState({ class: "animated fadeOutRight" })
     }
     
     render() {
         return (
-            <form action="" className={this.state.class} onSubmit={this.addToFirebase} onAnimationEnd={this.props.showHome}>
+            <form action="" className={`usernameForm ${this.state.class}`} onSubmit={this.addToFirebase} onAnimationEnd={this.props.showHome}>
                 <label htmlFor="username">Submit your username</label>
                 <div className="inputContainer">
                     <input type="text" id="username" name="username" maxLength="15" required autoFocus="autoFocus" value={this.state.userName} onChange={this.handleUserInput}/>

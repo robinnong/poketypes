@@ -21,7 +21,7 @@ class Game extends Component {
 
     // Make the first API call on page load to get ordered array of Pokemon names
     componentDidMount() { 
-        const randomOffset = Math.floor(Math.random() * 600);
+        const randomOffset = Math.floor(Math.random() * 900);
         axios({
             url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=40`,
             method: 'GET',
@@ -52,7 +52,7 @@ class Game extends Component {
     // Adds the animated "+1" annotation to the score
     animateScore = () => {
         // When user scores, animate PlusOne component. On animation ends, unmount the component. 
-        this.setState({ visible: !this.state.plusOne }) 
+        this.setState({ visible: !this.state.visible }) 
     }
 
     // When user submits answer, validate it 
@@ -111,9 +111,7 @@ class Game extends Component {
         }  
         // Since the API call gave back an array of objects, get only the names inside of each object and save to a new array
         let newArrayNames = [] 
-        newArray.forEach((object) => {
-            newArrayNames.push(object.name) 
-        }) 
+        newArray.forEach(object => newArrayNames.push(object.name)) 
         // Saves the array of Pokemon names to the component state
         this.setState({ pokemon: this.getFilteredPokemonList(newArrayNames) })  
         // Makes sure that the first Pokemon image is loaded 
@@ -129,18 +127,14 @@ class Game extends Component {
         const P = new Pokedex();
 
         // Making a array of Promises
-        array.forEach((name) => {
-            promises.push(P.resource([`/api/v2/pokemon/${name}`]))
-        })
+        array.forEach(name => promises.push(P.resource([`/api/v2/pokemon/${name}`])))
 
         // Method that fulfill all Promises in the array as a single Promise - so that we get the images in the right order
         Promise.all([...promises])
         .then(([...pokemon]) => {  
-            const pokemonArr = pokemon.map((item) => item[0])
+            const pokemonArr = pokemon.map(item => item[0])
             // Saving all the images in correct order
-            pokemonArr.forEach((pokemon) => { 
-                images.push(pokemon.sprites.front_default)
-            }) 
+            pokemonArr.forEach(pokemon => images.push(pokemon.sprites.front_default)) 
         })
         
         // Saving the array of images of the component state
@@ -156,13 +150,13 @@ class Game extends Component {
         return (
             <div className="wrapper game">
                 <div className="counterBar">
-                    <p className="pokedex"><img src={pokeball} alt="Pokeball icon" className="pokeballIcon"/><span>{this.state.gameCounter}</span>
+                    <div className="pokedex"><img src={pokeball} alt="Pokeball icon" className="pokeballIcon"/><span>{this.state.gameCounter}</span>
                     {
                         this.state.visible
                         ? <PlusOne unmount={this.animateScore} />
                         : null
-                    }</p>
-                    <p className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> 0:<span>{this.state.timer}</span></p>
+                    }</div>
+                    <div className="timer" aria-label="Timer"><i className="far fa-clock" aria-hidden="true"></i> 0:<span>{this.state.timer}</span></div>
                 </div>
                 {this.state.loadComplete ?
                     <div className="pokemonContainer">
