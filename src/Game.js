@@ -36,11 +36,9 @@ class Game extends Component {
         // Show a loading screen until first API comes back
         this.interval = setInterval(() => {
             // Update the countdown every second
-            this.setState({
-                timer: this.state.timer - 1
-            })
+            this.setState({ timer: this.state.timer - 1 })
+            // endGame will remove the Game component from the DOM 
             if (this.state.timer === 0) {
-                // endGame will remove the Game component from the DOM 
                 this.props.endGame()
             }
         }, 1000);  
@@ -54,9 +52,7 @@ class Game extends Component {
     // Adds the animated "+1" annotation to the score
     animateScore = () => {
         // When user scores, animate PlusOne component. On animation ends, unmount the component. 
-        this.setState({
-            visible: !this.state.plusOne
-        }) 
+        this.setState({ visible: !this.state.plusOne }) 
     }
 
     // When user submits answer, validate it 
@@ -70,9 +66,7 @@ class Game extends Component {
         // Validates the user's answer
         if (name === this.state.pokemon[this.state.gameCounter]) {
             // Increments the score
-            this.setState({
-                gameCounter: this.state.gameCounter + 1
-            }) 
+            this.setState({ gameCounter: this.state.gameCounter + 1 }) 
             // Adds an animated +1 annotation to the score
             this.animateScore()
             // Clears the input field if the answer is correct
@@ -120,11 +114,8 @@ class Game extends Component {
         newArray.forEach((object) => {
             newArrayNames.push(object.name) 
         }) 
-
         // Saves the array of Pokemon names to the component state
-        this.setState({
-            pokemon: this.getFilteredPokemonList(newArrayNames),
-        })  
+        this.setState({ pokemon: this.getFilteredPokemonList(newArrayNames) })  
         // Makes sure that the first Pokemon image is loaded 
         this.loopThis(newArrayNames) 
     }     
@@ -153,14 +144,10 @@ class Game extends Component {
         })
         
         // Saving the array of images of the component state
-        this.setState({
-            images: images,
-        })  
+        this.setState({ images: images })  
         // Start the game after 1 second to allow images to load
         setTimeout(() => {
-            this.setState({
-                loadComplete: true
-            })
+            this.setState({ loadComplete: true })
             this.startTimer()
         }, 1000)
     } 

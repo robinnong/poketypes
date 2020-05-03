@@ -36,10 +36,9 @@ class UserSubmit extends Component {
         })
     } 
 
+    // After username is uploaded to firebase, animate out the component. On animation end, the component will unmount
     animateOut = () => {
-        this.setState({
-            class: "usernameForm animated fadeOutRight"
-        })
+        this.setState({ class: "usernameForm animated fadeOutRight" })
     }
     
     render() {

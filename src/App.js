@@ -28,17 +28,7 @@ class App extends Component {
   } 
 
   // Calls function to get data from firebase whenever App loads so it's already available when Leaderboard is mounted (no waiting)
-  componentDidMount() { 
-    this.getHighScores()
-  }
-
-  // Fullscreen Mode enabled by the user when they start the game. They can exit out of full screen by using default back arrow OR by clicking "Exit fullscreen" on the landing page
-  goFull = () => {
-    this.setState({ isFull: true });
-  } 
-
-  // Gets the highscores saved in Firebase 
-  getHighScores = () => {
+  componentDidMount() {  
     // Sets up listener to firebase database
     const dbRef = firebase.database().ref();
     dbRef.on('value', (result) => {
@@ -56,6 +46,11 @@ class App extends Component {
       this.setState({ users: topScores })
     })
   }
+
+  // Fullscreen Mode enabled by the user when they start the game. 
+  goFull = () => {
+    this.setState({ isFull: true });
+  } 
 
   // Renders the Leaderboard component 
   renderLeaderboard = () => { 
