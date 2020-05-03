@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "213943f043f5acc58c7ca0f907e5f7c3",
+    "revision": "fbf744145877f0c7292ca2aee28b7e43",
     "url": "/poketypes/index.html"
   },
   {
-    "revision": "e457aff16b66b1438b0e",
-    "url": "/poketypes/static/css/main.748614d9.chunk.css"
+    "revision": "688a0959fdb3d35808a0",
+    "url": "/poketypes/static/css/main.fca9acc3.chunk.css"
   },
   {
     "revision": "f629d7d752d86db4e79e",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/poketypes/static/js/2.60991491.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e457aff16b66b1438b0e",
-    "url": "/poketypes/static/js/main.eeff175f.chunk.js"
+    "revision": "688a0959fdb3d35808a0",
+    "url": "/poketypes/static/js/main.c9513e5b.chunk.js"
   },
   {
     "revision": "d1d3279f272ffe825640",
