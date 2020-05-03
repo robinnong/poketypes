@@ -17,12 +17,19 @@ class Game extends Component {
             timer: 60,
             visible: false, 
             loadComplete: false,
-            className: ""
+            className: "",
+            desktop: true
         }
     }    
 
-    // Make the first API call on page load to get ordered array of Pokemon names
     componentDidMount() { 
+        // Detect the width of user's device
+        const mqlMobile = window.matchMedia('(max-width: 768px)');
+        if (mqlMobile.matches) {
+            this.setState({ desktop: false });
+        }
+        
+        // Make the first API call on page load to get ordered array of Pokemon names
         const randomOffset = Math.floor(Math.random() * 900);
         axios({
             url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=45`,
@@ -71,7 +78,7 @@ class Game extends Component {
         this.validateAnswer()
     }
 
-    // When user presses space bar key, validate answer
+    // DESKTOP ONLY: When user presses space bar key, validate answer
     onKeyDown = (e) => {
         if (e.key === " ") {
             this.validateAnswer() 
@@ -190,7 +197,11 @@ class Game extends Component {
                             <img className="pokemonImage" src={this.state.images[this.state.gameCounter]} alt={this.state.pokemon[this.state.gameCounter]} /> 
                         </div>
                         <form onSubmit={this.handleSubmit} onKeyDown={this.onKeyDown}> 
-                            <label htmlFor="word">Press enter or spacebar to submit</label>
+                            <label htmlFor="word">
+                                {this.state.desktop 
+                                ? "Press enter or space bar to submit" 
+                                : "Press enter to submit"}
+                            </label>
                             <input className={this.state.className} type="text" id="word" autoFocus="autoFocus" autoComplete="off" value={this.state.userInput} onChange={this.handleUserInput} />    
                         </form> 
                     </div>
