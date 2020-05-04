@@ -12,4 +12,4 @@ Dependencies:
 To-do: 
  - Refactor animations with React hooks and React Transition Group components
  - Add music 
- - Fix the initial image loading time
+ - Fix the initial image loading time and cache images in the user's browser on game load
