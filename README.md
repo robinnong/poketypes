@@ -4,7 +4,7 @@ Type the names of the Pokemon as they appear on the screen before the time runs 
 
 NOTICE: The PokeAPI is rate limited at 100 calls per minute - please don't try to start a new game more than 2 times within a minute or else you will receive an error. Thanks!
 
-Depdendencies:
+Dependencies:
 - <a href="https://www.npmjs.com/package/react-full-screen">React Fullscreen</a>
 - <a href="https://www.npmjs.com/package/axios">Axios</a>
 - <a href="https://github.com/PokeAPI/pokedex-promise-v2">Poke Promsie</a>
