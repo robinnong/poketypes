@@ -1,4 +1,4 @@
-#PokeTypes: A Pokemon-Inspired Speed Typing Game
+#PokeTypes: A Pokemon-Inspired Speed Typing Game#
 
 Type the names of the Pokemon as they appear on the screen before the time runs out to score points! This game was built in React as a project for Juno College's Immersive Web Development Bootcamp. Pokemon names and image urls are returned from the <a href="https://pokeapi.co/">PokeAPI</a>. 
 
