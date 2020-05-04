@@ -43,7 +43,7 @@ class App extends Component {
       // Sorts the array of users by their score
       userObjects.sort((a, b) => b.score - a.score);
       // Saves only the top 10 high scores and usernames
-      const topScores = userObjects.slice(0, 10)
+      const topScores = userObjects.slice(0, 20)
       this.setState({ users: topScores })
     })
 

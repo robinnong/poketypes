@@ -10,8 +10,10 @@ const Leaderboard = (props) => {
                 <span>Back to Home</span>
             </button> 
             <div className="leaderboard animated fadeInLeft">
-                <h3>Leaderboard</h3>
                 <i className="fas fa-crown" aria-hidden="true"></i>
+                <div className="headerBackground">
+                    <h3>Leaderboard</h3>
+                </div>
                 <ol> 
                     {props.users.map((user, index) => {
                         return (
