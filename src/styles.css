@@ -331,6 +331,7 @@ body,
   background-image: url(./assets/treeBackground1.png);
   background-repeat: repeat-x;
   background-position: top;
+  background-attachment: fixed;
   background-color: #70c08b;
 }
 
@@ -338,9 +339,11 @@ main {
   background-image: url(./assets/treeBackground2.png);
   background-repeat: repeat-x;
   background-position: bottom;
+  background-attachment: fixed;
   position: relative;
   text-align: center;
   min-height: 100vh;
+  height: 100%;
 }
 
 footer {
@@ -874,12 +877,17 @@ li:not(:last-of-type) {
   color: #3c3c3c;
 }
 
+@media (max-width: 768px) {
+  ol {
+    padding: 20px 30px 15px 30px;
+    overflow: auto;
+    height: 65vh;
+  }
+}
+
 @media (max-width: 568px) {
   .leaderboard {
     width: 100%;
-  }
-  ol {
-    padding: 20px 30px 15px 30px;
   }
 }
 
