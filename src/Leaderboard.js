@@ -1,8 +1,8 @@
 import React from 'react'; 
-import UserScores from './UserScores';
+import UserScores from './UserScores'; 
 
 // This function component only receives props from parent (App.js) and has no state
-const Leaderboard = (props) => {   
+const Leaderboard = (props) => {     
     return ( 
         <div className="leaderboardComponent wrapper">
             <button className="homeButton" onClick={props.showHome}>
@@ -19,6 +19,7 @@ const Leaderboard = (props) => {
                         return (
                             <UserScores
                                 key={index}
+                                index={index}
                                 rank={index+1}
                                 name={user.name}
                                 score={user.score}
