@@ -1,14 +1,6 @@
 @import 'setup';
 @import 'global';
 
-body { 
-    position: relative; 
-    color: white;
-    font-size: 2rem;
-    font-family: 'Sen', sans-serif;
-    min-width: 320px; 
-} 
-
 body,
 .fullscreen-enabled {
     background-image: url(./assets/treeBackground1.png);
@@ -29,21 +21,6 @@ main {
     height: 100%;
 }
 
-footer {   
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    text-align: center;
-    color: #202020;
-    font-size: 1.4rem;
-    font-weight: 700;  
-    background-color: #f0f0f0; 
-    padding: 15px;
-    p {line-height: 1.3rem;}
-    a {color: #ff5890;}
-} 
-
 h1, h2, h3 {
     font-weight: 400;
     font-family: 'Fredoka One', cursive;
@@ -63,44 +40,9 @@ h1::first-letter {color: #ffd000;}
  
 h3 { font-size: 2.6rem; } 
 
-// All forms
-form { 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 300px;
-    margin: 10px 0; 
-}
-
-// All inputs
-input {  
-    color: black;
-    font-size: 3rem;  
-    font-family: inherit;
-    letter-spacing: 2px;
-    text-align: center; 
-    text-transform: lowercase;
-    
-    background-color: white;
-    border: 2px solid white;
-    border-radius: 5px;
-
-    width: 100%;
-    margin-top: 10px;
-
-    transition: all 0.2s;
-        &:active,
-        &:focus {
-            border-radius: 5px;
-            border: 2px solid #ffd900;
-        }
-} 
-
 // Landing page component   
 .landing,
-.leaderboardComponent,
+.leaderboard,
 .game,
 .gameOver,
 .usernameForm {
@@ -139,48 +81,7 @@ input {
     width: 400px;
     button {width: 100%;}
     i {margin-left: 10px;}
-}
-
-.fullscreenButton {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    left: 0;
-    font-size: 1.6rem;
-    font-weight: 400;
-    width: 200px;
-    margin: 0 auto; 
-    border-radius: 5px;
-    z-index: 20;
-    color: #333333;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 5px;
-}
-
-.redButton, .blueButton {
-    padding: 10px 20px;
-    border-radius: 5px; 
-}
-
-.redButton {  
-    background-color: #d45594;
-    border-bottom: 6px solid #b4487e;
-    &:hover, 
-    &:focus {
-        background-color: #bd4e85; 
-        border-bottom: 6px solid #a04271;
-    } 
-}
-
-.blueButton {
-    background-color: #61a0ff;
-    border-bottom: 6px solid #4e85d6;
-    &:hover, 
-    &:focus {
-        background-color: #548bdf;
-        border-bottom: 6px solid #4678c4;  
-    }
-}
+} 
 
 .homeButton {
     position: absolute;
@@ -188,49 +89,15 @@ input {
     z-index: 20;
     margin: 0 auto;
     width: 170px;
-    padding-bottom: 5px;
+    padding-bottom: 5px; 
     border-bottom: 1px solid transparent; 
         i { margin-right: 5px; }
         &:hover,
         &:focus {border-bottom: 1px solid white;}
-}
-
-.fullscreenToggle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    color: rgb(82, 82, 82);
-    font-weight: 400;
-    font-size: 1.6rem;
-
-    width: 250px;
-    margin: 0 auto;
-    padding: 5px ;
-    
-    background-color: #ffffff99;
-    border-radius: 5px;
-    &:hover,
-    &:focus {background-color:  #ffffffe6;} 
-}
+} 
 
 /* Leaderboard Style */ 
-.leaderboardComponent { margin-top: 100px; }
-
-.leaderboard { 
-    position: relative; 
-
-    width: 500px;
-    margin: 10px auto 0 auto;
-
-    border-radius: 5px;    
-    background-color: white;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
-    animation-duration: 0.4s;
-        div {display: flex;}  
-        h3 {margin-bottom: 0;}
-} 
+.leaderboard { margin-top: 100px; }
 
 // Medal icon
 .fa-medal {
@@ -239,6 +106,7 @@ input {
     font-size: 2.4rem;
     margin-left: 5px;
 }
+
 .gold {color: #ffc011;}
 .silver {color: #bbbbbb;}
 .bronze {color: #ce7500;}
@@ -250,7 +118,7 @@ input {
     justify-content: center;
     align-items: center;
     border-radius: 5px 5px 0 0 ;
- }
+}
 
 /* crown icon from font awesome */
 .fa-crown {
@@ -443,7 +311,6 @@ li {
     bottom: 0;
     right: 0;
     left: 0;
-
     width: 200px;
     height: 200px;
     margin: 0 auto;  
@@ -472,11 +339,7 @@ li {
 
 @media (max-width:768px) {
     ol { padding: 20px 30px 15px 30px; }
-}
-
-@media (max-width:568px) {
-    .leaderboard { width: 100%; } 
-}
+} 
 
 // Media Queries - for phone 
 @media (max-width:480px) {
@@ -544,6 +407,4 @@ li {
     .inputContainer {width: 80%;}
 
     .usernameForm button {width: 200px;}
-
-    footer {font-size: 1.2rem;}
 }    

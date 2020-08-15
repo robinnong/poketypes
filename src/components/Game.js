@@ -1,10 +1,11 @@
 // Dependencies
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from 'axios'; 
+import { Input, Form } from './styles';
 // Components
 import PlusOne from './PlusOne'
-import pokeball from './assets/pokeball-bw.png';
-import loading from './assets/loading.png';
+import pokeball from '../assets/pokeball-bw.png';
+import loading from '../assets/loading.png';
 
 class Game extends Component {
     constructor() {
@@ -15,10 +16,10 @@ class Game extends Component {
             userInput: "",
             gameCounter: 0,
             timer: 60,
-            visible: false,
+            plusOne: false,
             loadComplete: false,
             className: "",
-            desktop: true
+            isDesktop: true
         }
     }
 
@@ -26,7 +27,7 @@ class Game extends Component {
         // Detect the width of user's device
         const mqlMobile = window.matchMedia('(max-width: 768px)');
         if (mqlMobile.matches) {
-            this.setState({ desktop: false });
+            this.setState({ isDesktop: false });
         }
 
         // Make the first API call on page load to get ordered array of Pokemon names
@@ -35,9 +36,7 @@ class Game extends Component {
             url: `https://pokeapi.co/api/v2/pokemon/?offset=${randomOffset}&limit=45`,
             method: 'GET',
             responseType: 'json'
-        }).then(res => {
-            this.getPokemonList(res);
-        })
+        }).then(res => this.getPokemonList(res))
     }
 
     // Starts the timer 
@@ -61,13 +60,11 @@ class Game extends Component {
     // Adds the animated "+1" annotation to the score
     animateScore = () => {
         // When user scores, animate PlusOne component. On animation ends, unmount the component. 
-        this.setState({ visible: !this.state.visible });
+        this.setState({ plusOne: !this.state.plusOne });
     }
 
-    handleUserInput = (e) => {
-        // Changes the input to lowercase
-        const input = (e.target.value).trim().toLowerCase();
-        // Component state is always aware of user's input
+    handleUserInput = (e) => { 
+        const input = e.target.value.trim().toLowerCase(); 
         this.setState({ userInput: input });
     }
 
@@ -114,9 +111,8 @@ class Game extends Component {
                 const newStr = item.replace(/-[^-]*$/, '');
                 // Adds the modified item to mapped array
                 return newStr;
-            } else {
-                return item;
-            }
+            } 
+            return item;
         })
         return filteredArray;
     }
@@ -136,13 +132,14 @@ class Game extends Component {
         let newArrayNames = [];
         newArray.forEach(object => newArrayNames.push(object.name));
         // Saves the array of Pokemon names to the component state
-        this.setState({ pokemon: this.getFilteredPokemonList(newArrayNames) });
+        const filteredArray = this.getFilteredPokemonList(newArrayNames);
+        this.setState({ pokemon: filteredArray });
         // Makes sure that the first Pokemon image is loaded 
-        this.loopThis(newArrayNames);
+        this.loopPromises(newArrayNames);
     }
 
     // Making another API call because we need to use a different endpoint to grab the images AFTER generating the array of Pokemon names. 
-    loopThis = (array) => {
+    loopPromises = (array) => {
         const images = [];
         const promises = [];
         // This is imported from the pokedex-promise-v2 node module
@@ -177,7 +174,7 @@ class Game extends Component {
                         <img src={pokeball} alt="Pokeball icon" className="pokeballIcon" />
                         <span>{this.state.gameCounter}</span>
                         {
-                            this.state.visible
+                            this.state.plusOne
                                 ? <PlusOne unmount={this.animateScore} />
                                 : null
                         }
@@ -195,14 +192,14 @@ class Game extends Component {
                         <div className="imageContainer">
                             <img className="pokemonImage" src={this.state.images[this.state.gameCounter]} alt={this.state.pokemon[this.state.gameCounter]} />
                         </div>
-                        <form onSubmit={this.handleSubmit} onKeyDown={this.onKeyDown}>
+                        <Form onSubmit={this.handleSubmit} onKeyDown={this.onKeyDown}>
                             <label htmlFor="word">
-                                {this.state.desktop
+                                {this.state.isDesktop
                                     ? "Press enter or space bar to submit"
                                     : "Press enter to submit"}
                             </label>
-                            <input className={this.state.className} type="text" id="word" autoFocus="autoFocus" autoComplete="off" value={this.state.userInput} onChange={this.handleUserInput} />
-                        </form>
+                            <Input className={this.state.className} type="text" id="word" autoFocus="autoFocus" autoComplete="off" value={this.state.userInput} onChange={this.handleUserInput} />
+                        </Form>
                     </div>
                     : <div className="loading">
                         <h2>Loading...</h2>
