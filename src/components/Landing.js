@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from './styles';
 
 const Landing = (props) => {   
     return (
@@ -9,8 +10,8 @@ const Landing = (props) => {
                 <p>Type the names as they appear on the screen.</p>
             </div>
             <div className="buttonContainer">
-                <button className="blueButton" type="button" onClick={props.startGame}>Start Game</button>
-                <button className="redButton" type="button" onClick={props.showLeaderboard}>Leaderboard</button>
+                <Button isRed={false} onClick={props.startGame}>Start Game</Button>
+                <Button isRed={true} onClick={props.showLeaderboard}>Leaderboard</Button>
             </div>
         </div>
     ) 

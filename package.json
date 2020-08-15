@@ -18,7 +18,8 @@
     "react-dom": "^16.13.1",
     "react-full-screen": "^0.2.4",
     "react-scripts": "3.4.1",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "predeploy": "npm run build",

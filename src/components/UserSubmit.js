@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import firebase from './firebase';
+import { Input, Button, Form } from './styles';
 
 const UserSubmit = (props) => { 
     const [userName, setUserName] = useState("");
@@ -31,14 +32,14 @@ const UserSubmit = (props) => {
     const animateOut = () => setClassN("animated fadeOutRight");
      
     return (
-        <form action="" className={`usernameForm ${classN}`} onSubmit={addToFirebase} onAnimationEnd={props.showHome}>
+        <Form action="" className={`usernameForm ${classN}`} onSubmit={addToFirebase} onAnimationEnd={props.showHome}>
             <label htmlFor="username">Submit your username</label>
             <div className="inputContainer">
-                <input type="text" id="username" name="username" maxLength="15" required autoFocus="autoFocus" value={userName} onChange={handleUserInput}/>
+                <Input type="text" id="username" name="username" maxLength="15" required autoFocus="autoFocus" value={userName} onChange={handleUserInput}/>
                 <p className="characterCount">characters remaining: {characterCount}</p>
             </div>
-            <button type="submit" className="blueButton">Submit score</button>
-        </form>
+            <Button isRed={false} type="submit">Submit score</Button>
+        </Form>
     )
 } 
 

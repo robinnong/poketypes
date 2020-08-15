@@ -40,8 +40,6 @@ a {
     }
 }
 
-img {display: block;}
-
 button {
     background-color: inherit;
     font-family: inherit; 
@@ -50,9 +48,28 @@ button {
     cursor: pointer;    
     transition: all 0.2s;
     margin: 0 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
 }
 
-input,
-button {border: none;} 
+img {display: block;} 
+
+input {   
+    border: none;
+    &:active,
+    &:focus {
+        border-radius: 5px;
+        border: 2px solid #ffd900;
+    }
+} 
 
 p {line-height: 2.6rem;} 
+
+body { 
+    position: relative; 
+    color: white;
+    font-size: 2rem;
+    font-family: 'Sen', sans-serif;
+    min-width: 320px; 
+} 

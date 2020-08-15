@@ -1,4 +1,5 @@
 import React from 'react'; 
+import { Button } from './styles';
 
 const GameOver = (props) =>{ 
     return (
@@ -6,12 +7,12 @@ const GameOver = (props) =>{
             <h2 className="animated bounceIn">Game Over</h2>
             <h3 className="endMessage animated fadeInUp">You caught <span>{props.finalScore}</span> Pokemon!</h3>  
             <div className="buttonContainer">
-                <button type="button" className="redButton" onClick={props.replay}>
+                <Button isRed={true} onClick={props.replay}>
                     Replay<i className="fas fa-reply" aria-hidden="true"></i>
-                </button>
-                <button type="button" className="blueButton" onClick={props.submitUsername}>
+                </Button>
+                <Button isRed={false} onClick={props.submitUsername}>
                     Next<i className="fas fa-share" aria-hidden="true"></i>
-                </button>
+                </Button>
             </div>
         </div>
     ) 

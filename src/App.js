@@ -1,15 +1,16 @@
 // Dependencies
 import React, { Component } from 'react';
 import Fullscreen from "react-full-screen";
-import firebase from './firebase';
+import firebase from './components/firebase';
 // Styles
 import './styles.css';
 // Components
-import Game from './Game.js';
-import Landing from './Landing.js';
-import GameOver from './GameOver.js';
-import Leaderboard from './Leaderboard.js';
-import UserSubmit from './UserSubmit';
+import Game from './components/Game.js';
+import Landing from './components/Landing.js';
+import GameOver from './components/GameOver.js';
+import Leaderboard from './components/Leaderboard.js';
+import UserSubmit from './components/UserSubmit';
+import { FullToggle, Footer } from './components/styles';
 
 class App extends Component {
   constructor() {
@@ -43,7 +44,7 @@ class App extends Component {
       // Sorts the array of users by their score
       userObjects.sort((a, b) => b.score - a.score);
       // Saves only the top 10 high scores and usernames
-      const topScores = userObjects.slice(0, 20)
+      const topScores = userObjects.slice(0, 50);
       this.setState({ users: topScores })
     })
 
@@ -54,7 +55,7 @@ class App extends Component {
     }
   }
 
-  fullscreen = () => {
+  setFullscreen = () => {
     this.setState({
       isFull: true,
       showButton: false
@@ -128,13 +129,16 @@ class App extends Component {
           onChange={isFull => this.setState({ isFull })}
         >
           <main>
-            {this.state.showButton ? <button className="fullscreenButton" onClick={this.fullscreen}>Enable Fullscreen Mode</button> : null}
+            {this.state.showButton 
+              ? <FullToggle onClick={this.setFullscreen}>Enable Fullscreen Mode</FullToggle> 
+              : null}
             {this.state.gameState}
           </main>
           {this.state.footerOn
-            ? <footer>
+            ? 
+            <Footer>
               <p>Code and design by <a href="https://github.com/robinnong" target="_blank" rel="noopener noreferrer">Robin Nong</a>. Pokémon and Pokémon character names are trademarks of Nintendo. Trademarks are property of respective owners.</p>
-            </footer>
+            </Footer>
             : null}
         </Fullscreen>
       </div>
