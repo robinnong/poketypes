@@ -1,25 +1,23 @@
-import React from 'react'
+import React from "react";
 
-const UserScores = (props) => {  
-    let color;
-    if (props.index === 0) {
-        color = "gold";
-    } else if (props.index === 1) {
-        color = "silver";
-    } else if (props.index === 2) {
-        color = "bronze";
-    }
-    
-    return (
-        <li>
-            <div>
-                <p className="rank">{props.rank}</p>
-                <p className="userName">{props.name}</p>
-                {props.index < 3 ? <i className={`fas fa-medal ${color}`}></i> : null}
-            </div>
-            <p className="score">{props.score}</p>
-        </li>
-    ) 
-}
+export const UserScores = ({ index, name, rank, score }) => {
+  let color;
+  if (index === 0) {
+    color = "gold";
+  } else if (index === 1) {
+    color = "silver";
+  } else if (index === 2) {
+    color = "bronze";
+  }
 
-export default UserScores;
+  return (
+    <li>
+      <div>
+        <p className="rank">{rank}</p>
+        <p className="userName">{name}</p>
+        {index < 3 ? <i className={`fas fa-medal ${color}`} /> : null}
+      </div>
+      <p className="score">{score}</p>
+    </li>
+  );
+};
