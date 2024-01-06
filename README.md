@@ -15,3 +15,4 @@ To-do:
  - Fix the initial image loading time and cache images in the user's browser on game load
  - Add simple Redux state management
  - Add error counter (max 3 errors, then it's an instant game over)
+ - Add Typescript
