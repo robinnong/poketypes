@@ -16,3 +16,4 @@ To-do:
  - Add simple Redux state management
  - Add error counter (max 3 errors, then it's an instant game over)
  - Add Typescript
+ - Add options for the user to customize game settings (example, only show Pokemon from a certain generation)
